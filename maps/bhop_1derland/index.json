@@ -1,0 +1,2207 @@
+{
+  "name": "bhop_1derland",
+  "lightmapUrl": "/replay/maps/bhop_1derland/lightmap.json?v=1e94-d53c",
+  "leafPages": [
+    {
+      "first": 0,
+      "count": 2502,
+      "url": "/replay/maps/bhop_1derland/geom/leafpage0.json?v=1e94-d53c"
+    }
+  ],
+  "dispPages": [
+    {
+      "first": 0,
+      "count": 0,
+      "url": "/replay/maps/bhop_1derland/geom/disppage0.json?v=1e94-d53c"
+    }
+  ],
+  "materialPages": [
+    {
+      "first": 0,
+      "count": 26,
+      "url": "/replay/maps/bhop_1derland/materials/matpage0.json?v=1e94-d53c"
+    }
+  ],
+  "brushModelPages": [
+    {
+      "first": 0,
+      "count": 20,
+      "url": "/replay/maps/bhop_1derland/geom/bsppage0.json?v=1e94-d53c"
+    }
+  ],
+  "studioModelPages": [
+    {
+      "first": 0,
+      "count": 0,
+      "url": "/replay/maps/bhop_1derland/geom/mdlpage0.json?v=1e94-d53c"
+    }
+  ],
+  "vertLightingPages": [
+    {
+      "first": 0,
+      "count": 0,
+      "url": "/replay/maps/bhop_1derland/geom/vhvpage0.json?v=1e94-d53c"
+    }
+  ],
+  "visPages": [
+    {
+      "first": 0,
+      "count": 1669,
+      "url": "/replay/maps/bhop_1derland/geom/vispage0.json?v=1e94-d53c"
+    }
+  ],
+  "ambientPages": [
+    {
+      "first": 0,
+      "count": 2502,
+      "url": "/replay/maps/bhop_1derland/geom/ambientpage0.json?v=1e94-d53c"
+    }
+  ],
+  "entities": [
+    {
+      "skyMaterial": {
+        "shader": "SourceUtils.Shaders.Sky",
+        "properties": [
+          {
+            "name": "cullFace",
+            "type": 1,
+            "value": false
+          },
+          {
+            "name": "facePosX",
+            "type": 4,
+            "value": "/replay/maps/bhop_1derland/materials/skybox/greyskyrt.vtf.json?v=1e94-d53c"
+          },
+          {
+            "name": "faceNegX",
+            "type": 4,
+            "value": "/replay/maps/bhop_1derland/materials/skybox/greyskylf.vtf.json?v=1e94-d53c"
+          },
+          {
+            "name": "facePosY",
+            "type": 4,
+            "value": "/replay/maps/bhop_1derland/materials/skybox/greyskybk.vtf.json?v=1e94-d53c"
+          },
+          {
+            "name": "faceNegY",
+            "type": 4,
+            "value": "/replay/maps/bhop_1derland/materials/skybox/greyskyft.vtf.json?v=1e94-d53c"
+          },
+          {
+            "name": "facePosZ",
+            "type": 4,
+            "value": "/replay/maps/bhop_1derland/materials/skybox/greyskyup.vtf.json?v=1e94-d53c"
+          },
+          {
+            "name": "faceNegZ",
+            "type": 4,
+            "value": "/replay/maps/bhop_1derland/materials/skybox/greyskydn.vtf.json?v=1e94-d53c"
+          }
+        ]
+      },
+      "model": 0,
+      "classname": "worldspawn"
+    },
+    {
+      "classname": "trigger_teleport",
+      "origin": {
+        "x": 1920.0,
+        "y": 3556.0,
+        "z": 60.0
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 560.0,
+        "y": -2336.0,
+        "z": 276.923
+      },
+      "angles": {
+        "x": -20.8901,
+        "y": 135.74,
+        "z": -19.648
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": -512.0,
+        "y": -2336.0,
+        "z": 276.923
+      },
+      "angles": {
+        "x": -20.8901,
+        "y": 45.7402,
+        "z": -19.648
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": -512.0,
+        "y": -1840.0,
+        "z": 280.0
+      },
+      "angles": {
+        "x": -20.8901,
+        "y": 315.24,
+        "z": -19.648
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 560.0,
+        "y": -1840.0,
+        "z": 280.0
+      },
+      "angles": {
+        "x": -20.8901,
+        "y": 225.74,
+        "z": -19.648
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 24.0,
+        "y": -1888.0,
+        "z": 112.0
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 0.0,
+        "y": 2112.0,
+        "z": 360.0
+      },
+      "angles": {
+        "x": -90.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 0.0,
+        "y": 2688.0,
+        "z": 360.0
+      },
+      "angles": {
+        "x": -90.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 0.0,
+        "y": 3264.0,
+        "z": 360.0
+      },
+      "angles": {
+        "x": -90.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "model": 2,
+      "clusters": [
+        290,292,293,304
+      ],
+      "classname": "func_brush",
+      "origin": {
+        "x": 1920.0,
+        "y": 3524.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 1136.0,
+        "y": 6144.0,
+        "z": 312.0
+      },
+      "angles": {
+        "x": -90.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 2368.0,
+        "y": 5824.0,
+        "z": 312.0
+      },
+      "angles": {
+        "x": -20.8901,
+        "y": 225.74,
+        "z": -19.648
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 1472.0,
+        "y": 5824.0,
+        "z": 312.0
+      },
+      "angles": {
+        "x": -20.8901,
+        "y": 294.74,
+        "z": -19.648
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 1536.0,
+        "y": 3840.0,
+        "z": 276.923
+      },
+      "angles": {
+        "x": -20.8901,
+        "y": 45.7402,
+        "z": -19.648
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 2288.0,
+        "y": 3840.0,
+        "z": 276.923
+      },
+      "angles": {
+        "x": -20.8901,
+        "y": 135.74,
+        "z": -19.648
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 1920.0,
+        "y": 4416.0,
+        "z": 192.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 1920.0,
+        "y": 4160.0,
+        "z": 192.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 1920.0,
+        "y": 4672.0,
+        "z": 192.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 1920.0,
+        "y": 4928.0,
+        "z": 192.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 1920.0,
+        "y": 5184.0,
+        "z": 192.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 1920.0,
+        "y": 5440.0,
+        "z": 192.0
+      }
+    },
+    {
+      "classname": "trigger_teleport",
+      "origin": {
+        "x": 1920.0,
+        "y": 2608.0,
+        "z": 48.0
+      }
+    },
+    {
+      "classname": "trigger_teleport",
+      "origin": {
+        "x": 1648.0,
+        "y": 3632.0,
+        "z": 48.0
+      }
+    },
+    {
+      "classname": "trigger_teleport",
+      "origin": {
+        "x": 1920.0,
+        "y": 3696.0,
+        "z": 48.0
+      }
+    },
+    {
+      "classname": "trigger_teleport",
+      "origin": {
+        "x": 2192.0,
+        "y": 3632.0,
+        "z": 48.0
+      }
+    },
+    {
+      "classname": "trigger_teleport",
+      "origin": {
+        "x": 1920.0,
+        "y": 4832.0,
+        "z": 48.0
+      }
+    },
+    {
+      "model": 8,
+      "clusters": [
+        7,10,35,41
+      ],
+      "classname": "func_brush",
+      "origin": {
+        "x": 1264.0,
+        "y": 6144.0,
+        "z": 136.0
+      }
+    },
+    {
+      "targetname": "endroom",
+      "classname": "info_teleport_destination",
+      "origin": {
+        "x": 1024.0,
+        "y": 6144.0,
+        "z": 41.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "trigger_teleport",
+      "origin": {
+        "x": 1920.0,
+        "y": 5740.0,
+        "z": 152.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": -320.0,
+        "y": 4960.0,
+        "z": 288.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 320.0,
+        "y": 4960.0,
+        "z": 288.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 320.0,
+        "y": 5216.0,
+        "z": 288.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 0.0,
+        "y": 5216.0,
+        "z": 288.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": -320.0,
+        "y": 5216.0,
+        "z": 288.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 320.0,
+        "y": 5472.0,
+        "z": 288.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 0.0,
+        "y": 5472.0,
+        "z": 288.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": -320.0,
+        "y": 5472.0,
+        "z": 288.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 2240.0,
+        "y": 2016.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 2336.0,
+        "y": 2112.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 2240.0,
+        "y": 2208.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 2144.0,
+        "y": 2112.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 2240.0,
+        "y": 2528.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 2336.0,
+        "y": 2624.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 2240.0,
+        "y": 2720.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 2144.0,
+        "y": 2624.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 2240.0,
+        "y": 3040.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 2336.0,
+        "y": 3136.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 2240.0,
+        "y": 3232.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 2144.0,
+        "y": 3136.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 1600.0,
+        "y": 2016.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 1504.0,
+        "y": 2112.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 1600.0,
+        "y": 2208.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 1696.0,
+        "y": 2112.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 1600.0,
+        "y": 2528.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 1504.0,
+        "y": 2624.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 1600.0,
+        "y": 2720.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 1696.0,
+        "y": 2624.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 1600.0,
+        "y": 3040.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 1504.0,
+        "y": 3136.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 1600.0,
+        "y": 3232.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 1696.0,
+        "y": 3136.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 1600.0,
+        "y": 3552.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 1696.0,
+        "y": 3648.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 1504.0,
+        "y": 3648.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 2240.0,
+        "y": 3552.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 2336.0,
+        "y": 3648.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 2144.0,
+        "y": 3648.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 1472.0,
+        "y": -384.0,
+        "z": 276.923
+      },
+      "angles": {
+        "x": -20.8901,
+        "y": 45.7402,
+        "z": -19.648
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 2224.0,
+        "y": -384.0,
+        "z": 276.923
+      },
+      "angles": {
+        "x": -20.8901,
+        "y": 135.74,
+        "z": -19.648
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 2240.0,
+        "y": 1600.0,
+        "z": 312.0
+      },
+      "angles": {
+        "x": -20.8901,
+        "y": 225.74,
+        "z": -19.648
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 1616.0,
+        "y": 1600.0,
+        "z": 312.0
+      },
+      "angles": {
+        "x": -20.8901,
+        "y": 294.74,
+        "z": -19.648
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 2368.0,
+        "y": 3712.0,
+        "z": 312.0
+      },
+      "angles": {
+        "x": -20.8901,
+        "y": 225.74,
+        "z": -19.648
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 2288.0,
+        "y": 1728.0,
+        "z": 276.923
+      },
+      "angles": {
+        "x": -20.8901,
+        "y": 135.74,
+        "z": -19.648
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 1536.0,
+        "y": 1728.0,
+        "z": 276.923
+      },
+      "angles": {
+        "x": -20.8901,
+        "y": 45.7402,
+        "z": -19.648
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 1472.0,
+        "y": 3712.0,
+        "z": 312.0
+      },
+      "angles": {
+        "x": -20.8901,
+        "y": 294.74,
+        "z": -19.648
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": -456.0,
+        "y": 3800.0,
+        "z": 280.0
+      },
+      "angles": {
+        "x": -22.1615,
+        "y": 43.9525,
+        "z": -19.9849
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 464.0,
+        "y": 3792.0,
+        "z": 280.0
+      },
+      "angles": {
+        "x": -22.1615,
+        "y": 128.952,
+        "z": -19.9849
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": -446.477,
+        "y": 5816.0,
+        "z": 280.0
+      },
+      "angles": {
+        "x": -22.1615,
+        "y": 308.952,
+        "z": -19.9849
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 473.523,
+        "y": 5808.0,
+        "z": 280.0
+      },
+      "angles": {
+        "x": -22.1615,
+        "y": 223.952,
+        "z": -19.9849
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 0.0,
+        "y": 4960.0,
+        "z": 288.0
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 0.0,
+        "y": 2944.0,
+        "z": 312.0
+      },
+      "angles": {
+        "x": -90.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 0.0,
+        "y": 2432.0,
+        "z": 312.0
+      },
+      "angles": {
+        "x": -90.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 0.0,
+        "y": 1696.0,
+        "z": 368.0
+      },
+      "angles": {
+        "x": -25.5,
+        "y": 90.0,
+        "z": -90.0
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 0.0,
+        "y": 3680.0,
+        "z": 368.0
+      },
+      "angles": {
+        "x": -25.5,
+        "y": 270.0,
+        "z": -90.0
+      }
+    },
+    {
+      "targetname": "room6",
+      "classname": "info_teleport_destination",
+      "origin": {
+        "x": 1920.0,
+        "y": 3904.0,
+        "z": 96.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 90.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 24.0,
+        "y": -384.0,
+        "z": 160.0
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": -352.0,
+        "y": -1760.0,
+        "z": 276.923
+      },
+      "angles": {
+        "x": -20.8901,
+        "y": 45.7402,
+        "z": -19.648
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 400.0,
+        "y": -1760.0,
+        "z": 276.923
+      },
+      "angles": {
+        "x": -20.8901,
+        "y": 135.74,
+        "z": -19.648
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": -280.0,
+        "y": -376.0,
+        "z": 280.0
+      },
+      "angles": {
+        "x": -20.8901,
+        "y": 294.74,
+        "z": -19.648
+      }
+    },
+    {
+      "classname": "light_spot",
+      "origin": {
+        "x": 336.0,
+        "y": -368.0,
+        "z": 280.0
+      },
+      "angles": {
+        "x": -20.8901,
+        "y": 225.74,
+        "z": -19.648
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": -192.0,
+        "y": -948.115,
+        "z": 120.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": -192.0,
+        "y": -808.0,
+        "z": 208.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": -232.0,
+        "y": -552.0,
+        "z": 208.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": -184.0,
+        "y": -672.0,
+        "z": 120.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 248.0,
+        "y": -680.0,
+        "z": 128.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 168.0,
+        "y": -800.0,
+        "z": 128.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 288.0,
+        "y": -744.0,
+        "z": 192.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 288.0,
+        "y": -864.0,
+        "z": 192.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": -256.0,
+        "y": -1336.0,
+        "z": 216.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": -256.0,
+        "y": -1520.0,
+        "z": 216.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 288.0,
+        "y": -1448.0,
+        "z": 216.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 344.0,
+        "y": -1576.0,
+        "z": 216.0
+      }
+    },
+    {
+      "Brightness": {
+        "R": 209,
+        "G": 209,
+        "B": 209,
+        "A": 100
+      },
+      "Ambient": {
+        "R": 255,
+        "G": 255,
+        "B": 255,
+        "A": 20
+      },
+      "BrightnessHdr": {
+        "R": 255,
+        "G": 255,
+        "B": 255,
+        "A": 1
+      },
+      "AmbientHdr": {
+        "R": 255,
+        "G": 255,
+        "B": 255,
+        "A": 1
+      },
+      "BrightnessScaleHdr": 1.0,
+      "AmbientScaleHdr": 1.0,
+      "Pitch": 0.0,
+      "classname": "light_environment",
+      "origin": {
+        "x": 1920.0,
+        "y": 3584.0,
+        "z": 248.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "Brightness": {
+        "R": 255,
+        "G": 217,
+        "B": 217,
+        "A": 100
+      },
+      "Ambient": {
+        "R": 255,
+        "G": 255,
+        "B": 255,
+        "A": 20
+      },
+      "BrightnessHdr": {
+        "R": 255,
+        "G": 255,
+        "B": 255,
+        "A": 1
+      },
+      "AmbientHdr": {
+        "R": 255,
+        "G": 255,
+        "B": 255,
+        "A": 1
+      },
+      "BrightnessScaleHdr": 1.0,
+      "AmbientScaleHdr": 1.0,
+      "Pitch": 0.0,
+      "classname": "light_environment",
+      "origin": {
+        "x": 2240.0,
+        "y": 1344.0,
+        "z": 288.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "targetname": "room5",
+      "classname": "info_teleport_destination",
+      "origin": {
+        "x": 1920.0,
+        "y": 1824.0,
+        "z": 104.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 90.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "trigger_teleport",
+      "origin": {
+        "x": 1920.0,
+        "y": 3612.0,
+        "z": 132.0
+      }
+    },
+    {
+      "classname": "trigger_teleport",
+      "origin": {
+        "x": 1916.0,
+        "y": 1524.0,
+        "z": 132.0
+      }
+    },
+    {
+      "classname": "env_sun",
+      "origin": {
+        "x": 408.0,
+        "y": -1756.0,
+        "z": 272.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "trigger_teleport",
+      "origin": {
+        "x": 0.0,
+        "y": 5808.0,
+        "z": 152.0
+      }
+    },
+    {
+      "targetname": "room4",
+      "classname": "info_teleport_destination",
+      "origin": {
+        "x": 1920.0,
+        "y": -320.0,
+        "z": 100.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 90.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "trigger_teleport",
+      "origin": {
+        "x": 1920.0,
+        "y": 608.0,
+        "z": 48.0
+      }
+    },
+    {
+      "classname": "trigger_teleport",
+      "origin": {
+        "x": 0.0,
+        "y": 3680.0,
+        "z": 192.0
+      }
+    },
+    {
+      "targetname": "room3",
+      "classname": "info_teleport_destination",
+      "origin": {
+        "x": 0.0,
+        "y": 3840.0,
+        "z": 100.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 90.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "trigger_teleport",
+      "origin": {
+        "x": 0.0,
+        "y": 4800.0,
+        "z": 48.0
+      }
+    },
+    {
+      "classname": "trigger_teleport",
+      "origin": {
+        "x": 0.0,
+        "y": 2688.0,
+        "z": 48.0
+      }
+    },
+    {
+      "classname": "trigger_teleport",
+      "origin": {
+        "x": 24.0,
+        "y": -936.0,
+        "z": 48.0
+      }
+    },
+    {
+      "Brightness": {
+        "R": 218,
+        "G": 218,
+        "B": 218,
+        "A": 100
+      },
+      "Ambient": {
+        "R": 255,
+        "G": 255,
+        "B": 255,
+        "A": 20
+      },
+      "BrightnessHdr": {
+        "R": 255,
+        "G": 255,
+        "B": 255,
+        "A": 1
+      },
+      "AmbientHdr": {
+        "R": 255,
+        "G": 255,
+        "B": 255,
+        "A": 1
+      },
+      "BrightnessScaleHdr": 1.0,
+      "AmbientScaleHdr": 1.0,
+      "Pitch": 0.0,
+      "classname": "light_environment",
+      "origin": {
+        "x": 528.0,
+        "y": 3264.0,
+        "z": 464.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "Brightness": {
+        "R": 255,
+        "G": 223,
+        "B": 224,
+        "A": 100
+      },
+      "Ambient": {
+        "R": 255,
+        "G": 255,
+        "B": 255,
+        "A": 20
+      },
+      "BrightnessHdr": {
+        "R": 255,
+        "G": 255,
+        "B": 255,
+        "A": 1
+      },
+      "AmbientHdr": {
+        "R": 255,
+        "G": 255,
+        "B": 255,
+        "A": 1
+      },
+      "BrightnessScaleHdr": 1.0,
+      "AmbientScaleHdr": 1.0,
+      "Pitch": 0.0,
+      "classname": "light_environment",
+      "origin": {
+        "x": -304.0,
+        "y": 3824.0,
+        "z": 280.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "env_fire",
+      "origin": {
+        "x": -104.0,
+        "y": 2943.49,
+        "z": 352.0
+      }
+    },
+    {
+      "classname": "env_fire",
+      "origin": {
+        "x": 0.0,
+        "y": 3048.0,
+        "z": 352.0
+      }
+    },
+    {
+      "classname": "env_fire",
+      "origin": {
+        "x": 104.0,
+        "y": 2944.0,
+        "z": 352.0
+      }
+    },
+    {
+      "classname": "env_fire",
+      "origin": {
+        "x": 0.0,
+        "y": 2840.0,
+        "z": 352.0
+      }
+    },
+    {
+      "classname": "env_fire",
+      "origin": {
+        "x": 0.0,
+        "y": 2328.0,
+        "z": 352.0
+      }
+    },
+    {
+      "classname": "env_fire",
+      "origin": {
+        "x": 0.0,
+        "y": 2536.0,
+        "z": 352.0
+      }
+    },
+    {
+      "classname": "env_fire",
+      "origin": {
+        "x": -104.0,
+        "y": 2431.49,
+        "z": 352.0
+      }
+    },
+    {
+      "classname": "env_fire",
+      "origin": {
+        "x": 104.0,
+        "y": 2432.0,
+        "z": 352.0
+      }
+    },
+    {
+      "classname": "env_fire",
+      "origin": {
+        "x": 32.0,
+        "y": 1696.0,
+        "z": 360.0
+      }
+    },
+    {
+      "classname": "env_fire",
+      "origin": {
+        "x": -32.0,
+        "y": 1696.0,
+        "z": 360.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 0.0,
+        "y": 2328.0,
+        "z": 352.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 104.0,
+        "y": 2432.0,
+        "z": 352.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 0.0,
+        "y": 2536.0,
+        "z": 352.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": -104.0,
+        "y": 2432.0,
+        "z": 352.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": -104.0,
+        "y": 2944.0,
+        "z": 352.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 0.0,
+        "y": 3048.0,
+        "z": 352.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 104.0,
+        "y": 2944.0,
+        "z": 352.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 0.0,
+        "y": 2840.0,
+        "z": 352.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": -32.0,
+        "y": 1696.0,
+        "z": 360.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 32.0,
+        "y": 1696.0,
+        "z": 360.0
+      }
+    },
+    {
+      "targetname": "room2",
+      "classname": "info_teleport_destination",
+      "origin": {
+        "x": 0.0,
+        "y": 1728.0,
+        "z": 100.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 90.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "env_fire",
+      "origin": {
+        "x": -32.0,
+        "y": 3680.0,
+        "z": 360.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": -32.0,
+        "y": 3680.0,
+        "z": 360.0
+      }
+    },
+    {
+      "classname": "env_fire",
+      "origin": {
+        "x": 32.0,
+        "y": 3680.0,
+        "z": 360.0
+      }
+    },
+    {
+      "classname": "light",
+      "origin": {
+        "x": 32.0,
+        "y": 3680.0,
+        "z": 360.0
+      }
+    },
+    {
+      "targetname": "room1",
+      "classname": "info_teleport_destination",
+      "origin": {
+        "x": 24.0,
+        "y": -1672.0,
+        "z": 108.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 90.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "trigger_teleport",
+      "origin": {
+        "x": 24.0,
+        "y": -372.0,
+        "z": 152.0
+      }
+    },
+    {
+      "classname": "info_player_terrorist",
+      "origin": {
+        "x": -424.0,
+        "y": -1896.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_terrorist",
+      "origin": {
+        "x": -424.0,
+        "y": -1960.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_terrorist",
+      "origin": {
+        "x": -424.0,
+        "y": -2024.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_terrorist",
+      "origin": {
+        "x": -424.0,
+        "y": -2088.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_terrorist",
+      "origin": {
+        "x": -424.0,
+        "y": -2152.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_terrorist",
+      "origin": {
+        "x": -424.0,
+        "y": -2216.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_terrorist",
+      "origin": {
+        "x": -424.0,
+        "y": -2280.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_terrorist",
+      "origin": {
+        "x": -296.0,
+        "y": -2280.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_terrorist",
+      "origin": {
+        "x": -296.0,
+        "y": -2216.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_terrorist",
+      "origin": {
+        "x": -296.0,
+        "y": -2152.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_terrorist",
+      "origin": {
+        "x": -296.0,
+        "y": -2088.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_terrorist",
+      "origin": {
+        "x": -296.0,
+        "y": -2024.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_terrorist",
+      "origin": {
+        "x": -296.0,
+        "y": -1960.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_terrorist",
+      "origin": {
+        "x": -296.0,
+        "y": -1896.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_terrorist",
+      "origin": {
+        "x": -168.0,
+        "y": -2280.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_terrorist",
+      "origin": {
+        "x": -168.0,
+        "y": -2216.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_terrorist",
+      "origin": {
+        "x": -168.0,
+        "y": -2152.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_terrorist",
+      "origin": {
+        "x": -168.0,
+        "y": -2088.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_terrorist",
+      "origin": {
+        "x": -168.0,
+        "y": -2024.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_terrorist",
+      "origin": {
+        "x": -168.0,
+        "y": -1960.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_terrorist",
+      "origin": {
+        "x": -168.0,
+        "y": -1896.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_counterterrorist",
+      "origin": {
+        "x": 472.0,
+        "y": -1896.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_counterterrorist",
+      "origin": {
+        "x": 472.0,
+        "y": -1960.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_counterterrorist",
+      "origin": {
+        "x": 472.0,
+        "y": -2024.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_counterterrorist",
+      "origin": {
+        "x": 472.0,
+        "y": -2088.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_counterterrorist",
+      "origin": {
+        "x": 472.0,
+        "y": -2152.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_counterterrorist",
+      "origin": {
+        "x": 472.0,
+        "y": -2216.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_counterterrorist",
+      "origin": {
+        "x": 472.0,
+        "y": -2280.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_counterterrorist",
+      "origin": {
+        "x": 344.0,
+        "y": -2280.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_counterterrorist",
+      "origin": {
+        "x": 344.0,
+        "y": -1896.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_counterterrorist",
+      "origin": {
+        "x": 344.0,
+        "y": -1960.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_counterterrorist",
+      "origin": {
+        "x": 344.0,
+        "y": -2024.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_counterterrorist",
+      "origin": {
+        "x": 344.0,
+        "y": -2088.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_counterterrorist",
+      "origin": {
+        "x": 344.0,
+        "y": -2152.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_counterterrorist",
+      "origin": {
+        "x": 344.0,
+        "y": -2216.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_counterterrorist",
+      "origin": {
+        "x": 216.0,
+        "y": -2280.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_counterterrorist",
+      "origin": {
+        "x": 216.0,
+        "y": -1896.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_counterterrorist",
+      "origin": {
+        "x": 216.0,
+        "y": -1960.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_counterterrorist",
+      "origin": {
+        "x": 216.0,
+        "y": -2024.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_counterterrorist",
+      "origin": {
+        "x": 216.0,
+        "y": -2088.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_counterterrorist",
+      "origin": {
+        "x": 216.0,
+        "y": -2152.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "classname": "info_player_counterterrorist",
+      "origin": {
+        "x": 216.0,
+        "y": -2216.0,
+        "z": 33.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 180.0,
+        "z": 0.0
+      }
+    },
+    {
+      "model": 19,
+      "clusters": [
+        1592,1594,1609,1614,1629,1634,1639
+      ],
+      "classname": "func_brush",
+      "origin": {
+        "x": 24.0,
+        "y": -1836.0,
+        "z": 104.0
+      }
+    },
+    {
+      "Brightness": {
+        "R": 255,
+        "G": 255,
+        "B": 191,
+        "A": 100
+      },
+      "Ambient": {
+        "R": 255,
+        "G": 255,
+        "B": 255,
+        "A": 20
+      },
+      "BrightnessHdr": {
+        "R": 255,
+        "G": 255,
+        "B": 255,
+        "A": 1
+      },
+      "AmbientHdr": {
+        "R": 255,
+        "G": 255,
+        "B": 255,
+        "A": 1
+      },
+      "BrightnessScaleHdr": 1.0,
+      "AmbientScaleHdr": 1.0,
+      "Pitch": 0.0,
+      "classname": "light_environment",
+      "origin": {
+        "x": 24.0,
+        "y": -2328.0,
+        "z": 280.0
+      },
+      "angles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    }
+  ]
+}
