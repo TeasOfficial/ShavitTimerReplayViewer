@@ -1,4 +1,4 @@
-namespace Gokz {
+namespace Bhop {
     export class KeyDisplay {
         private readonly viewer: ReplayViewer;
 

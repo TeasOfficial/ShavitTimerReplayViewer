@@ -1,4 +1,4 @@
-namespace Gokz {
+namespace Bhop {
     interface IRouteLineSegment {
         debugLine: WebGame.DebugLine;
         clusters: {[index: number]: boolean};
@@ -31,7 +31,7 @@ namespace Gokz {
         constructor(map: SourceUtils.Map, replay: ReplayFile) {
             super(map, { classname: "route_line", clusters: null });
 
-            this.segments = new Array<IRouteLineSegment>(Math.ceil(replay.tickCount / RouteLine.segmentTicks));
+            this.segments = new Array<IRouteLineSegment>(Math.ceil(replay.size / RouteLine.segmentTicks));
 
             const tickData = new TickData();
             const progressScale = 16 / replay.tickRate;
@@ -40,7 +40,7 @@ namespace Gokz {
 
             for (let i = 0; i < this.segments.length; ++i) {
                 const firstTick = i * RouteLine.segmentTicks;
-                const lastTick = Math.min((i + 1) * RouteLine.segmentTicks, replay.tickCount - 1);
+                const lastTick = Math.min((i + 1) * RouteLine.segmentTicks, replay.size - 1);
 
                 const segment = this.segments[i] = {
                     debugLine: new WebGame.DebugLine(map.viewer),

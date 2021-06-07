@@ -1,0 +1,294 @@
+.map-viewer {
+    overflow: hidden;
+}
+
+.map-viewer .crosshair {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    margin-left: -8px;
+    margin-right: -8px;
+    left: 50%;
+    top: 50%;
+    background-image: url(../images/crosshair.png);
+}
+
+.map-viewer .playback-bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 40px;
+    line-height: 40px;
+
+    background-color: rgba(15, 15, 15, 0.825);
+    font-weight: 550;
+
+    transition: bottom 0.1s ease-out;
+}
+
+.map-viewer .playback-bar.hidden {
+    bottom: -40px;
+    transition: bottom 0.2s ease-in;
+}
+
+.map-viewer .playback-bar .scrubber-container {
+    position: absolute;
+    left: 136px;
+    right: 160px;
+    top: 0;
+    bottom: 0;
+    vertical-align: middle;
+}
+
+.map-viewer .playback-bar .scrubber-container .scrubber {
+    width: 100%;
+    height: 36px;
+}
+
+.map-viewer .playback-bar .time {
+    position: absolute;
+    left: 40px;
+    width: 96px;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    user-select: none;
+}
+
+.map-viewer .playback-bar .speed {
+    position: absolute;
+    right: 92px;
+    width: 56px;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    user-select: none;
+}
+
+.map-viewer .playback-bar .speed:hover {
+    cursor: pointer;
+    text-shadow: 0px 0px 4px rgba(255, 255, 255, 0.25);
+}
+
+.map-viewer .playback-bar .speed::before {
+    content: "x";
+}
+
+.map-viewer .playback-bar .control {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 8px;
+}
+
+.map-viewer .playback-bar .control:hover {
+    cursor: pointer;
+    -webkit-filter: drop-shadow(0px 0px 4px rgba(255, 255, 255, 0.25));
+    filter: drop-shadow(0px 0px 4px rgba(255, 255, 255, 0.25));
+}
+
+.map-viewer .playback-bar .pause {
+    display: none;
+    left: 16px;
+    background-image: url(../images/pause.png);
+}
+
+.map-viewer .playback-bar .play {
+    left: 16px;
+    background-image: url(../images/play.png);
+}
+
+.map-viewer .playback-bar .settings {
+    right: 56px;
+    background-image: url(../images/settings.png);
+}
+
+.map-viewer .playback-bar .fullscreen {
+    right: 16px;
+    background-image: url(../images/fullscreen.png);
+}
+
+.map-viewer .speed-control {
+    display: none;
+    position: absolute;
+    bottom: 48px;
+    right: 8px;
+    width: 256px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: rgba(15, 15, 15, 0.825);
+}
+
+.map-viewer .speed-control .speed-slider {
+    width: 100%;
+}
+
+.map-viewer .message {
+    position: absolute;
+    width: 512px;
+    height: 64px;
+    left: 50%;
+    top: 50%;
+    margin-left: -256px;
+    margin-top: -32px;
+
+    background-color: rgba(15, 15, 15, 0.825);
+    color: white;
+    font-family: sans-serif;
+    text-align: center;
+    line-height: 64px;
+    user-select: none;
+}
+
+.map-viewer .key-display {
+    position: absolute;
+    width: 296px;
+    height: 248px;
+    left: 8px;
+    bottom: 48px;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.map-viewer .key-display .stat, .map-viewer .key-display .key {
+    position: absolute;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #666;
+}
+
+.map-viewer .key-display .stat {
+    top: 8px;
+    width: 136px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 10pt;
+}
+
+.map-viewer .key-display .sync-outer {
+    left: 8px;
+}
+
+.map-viewer .key-display .speed-outer {
+    right: 8px;
+}
+
+.map-viewer .key-display .stat .value {
+    color: #fff;
+    font-size: 12pt;
+}
+
+.map-viewer .key-display .key {
+    width: 64px;
+    height: 56px;
+    line-height: 56px;
+    font-weight: bold;
+}
+
+.map-viewer .key-display .pressed {
+    background-color: rgba(0, 0, 0, 0.875);
+    color: #fff;
+    text-shadow: 0px 0px 4px rgba(255, 255, 255, 0.5);
+}
+
+.map-viewer .key-display .key-w {
+    left: 152px;
+    bottom: 136px;
+}
+
+.map-viewer .key-display .key-a {
+    left: 80px;
+    bottom: 72px;
+}
+
+.map-viewer .key-display .key-s {
+    left: 152px;
+    bottom: 72px;
+}
+
+.map-viewer .key-display .key-d {
+    left: 224px;
+    bottom: 72px;
+}
+
+.map-viewer .key-display .key-walk {
+    left: 8px;
+    bottom: 136px;
+}
+
+.map-viewer .key-display .key-duck {
+    left: 8px;
+    bottom: 72px;
+}
+
+.map-viewer .key-display .key-jump {
+    left: 8px;
+    width: 280px;
+    bottom: 8px;
+}
+
+.map-viewer .options-menu {
+    position: absolute;
+    width: 256px;
+    right: 8px;
+    bottom: 48px;
+    background-color: rgba(0, 0, 0, 0.25);
+    line-height: 24px;
+}
+
+.map-viewer .options-title {
+    margin: 8px;
+    text-align: center;
+    color: #999;
+}
+
+.map-viewer .options-list {
+    margin: 8px;
+}
+
+.map-viewer .options-list .option {
+    user-select: none;
+    padding: 4px 4px 4px 8px;
+    background-color: rgba(0, 0, 0, 0.25);
+    color: #ccc;
+    cursor: pointer;
+}
+
+.map-viewer .options-list .option:hover {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.map-viewer .options-list .option .value {
+    float: right;
+    text-align: center;
+    width: 80px;
+    color: #fff;
+}
+
+.map-viewer .options-list .option .toggle {
+    position: relative;
+    float: right;
+    margin: 2px;
+    width: 48px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #333;
+}
+
+.map-viewer .options-list .option .toggle .knob {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 16px;
+    height: 12px;
+    border-radius: 6px;
+    background-color: #666;
+    transition: all 0.06667s ease-in-out;
+}
+
+.map-viewer .options-list .option .toggle.on .knob {
+    left: 28px;
+    background-color: #ccc;
+}

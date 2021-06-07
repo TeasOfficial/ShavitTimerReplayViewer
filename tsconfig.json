@@ -5,11 +5,11 @@
     "removeComments": false,
     "sourceMap": false,
     "declaration": true,
-    "outFile": "js/replayviewer.js",
+    "outFile": "src/js/replayviewer.js",
     "target": "es5"
   },
   "compileOnSave": true,
-  "include": ["src/**/*.ts"],
+  "include": ["src/*.ts"],
   "exclude": [
     "node_modules",
     "wwwroot"

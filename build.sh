@@ -23,15 +23,11 @@ mkdir -p "$TARGETDIR/$RESOURCEDIR/js"
 mkdir -p "$TARGETDIR/$RESOURCEDIR/styles"
 mkdir -p "$TARGETDIR/$RESOURCEDIR/images"
 
-cp -r js "$TARGETDIR/$RESOURCEDIR"
-cp -r styles "$TARGETDIR/$RESOURCEDIR"
-cp -r images "$TARGETDIR/$RESOURCEDIR"
+cp -r src/js "$TARGETDIR/$RESOURCEDIR"
+cp -r src/styles "$TARGETDIR/$RESOURCEDIR"
+cp -r src/images "$TARGETDIR/$RESOURCEDIR"
 
-MIDNIGHT=$(date -d 'today 00:00:00' "+%s")
-NOW=$(date "+%s")
-DIFF=$(($NOW - $MIDNIGHT))
-
-VERSION=$(git rev-parse --short HEAD)-$(printf '%x\n' $DIFF)
+VERSION="1.0"
 
 SED_ARGS=( 's/${VERSION}/'${VERSION}'/g;s|${RESOURCEDIR}|'${RESOURCEDIR}'|g;s|${BASEURL}|'${BASEURL}'|g;s|${MAPSURL}|'${MAPSURL}'|g' )
 sed "${SED_ARGS[@]}" "${INDEXTEMPLATE}" >"${TARGETDIR}/index.html"

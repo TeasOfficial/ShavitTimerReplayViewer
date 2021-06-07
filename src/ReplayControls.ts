@@ -1,4 +1,4 @@
-namespace Gokz {
+namespace Bhop {
     export class ReplayControls {
         private static readonly speedSliderValues = [-5, -1, 0.1, 0.25, 1, 2, 5, 10];
 
@@ -106,7 +106,7 @@ namespace Gokz {
             });
 
             viewer.replayLoaded.addListener(replay => {
-                this.scrubberElem.max = replay.tickCount.toString();
+                this.scrubberElem.max = replay.size.toString();
             });
 
             viewer.isPlayingChanged.addListener(isPlaying => {

@@ -1,4 +1,4 @@
-namespace Gokz {
+namespace Bhop {
     export type Handler<TEventArgs, TSender> = (args: TEventArgs, sender: TSender) => void;
     export class Event<TEventArgs, TSender> {
         private readonly sender: TSender;

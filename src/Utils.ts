@@ -1,4 +1,4 @@
-namespace Gokz {
+namespace Bhop {
     export class Utils {
         static deltaAngle(a: number, b: number): number {
             return (b - a) - Math.floor((b - a + 180) / 360) * 360;

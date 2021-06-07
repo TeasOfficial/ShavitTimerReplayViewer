@@ -1,17 +1,27 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var Gokz;
-(function (Gokz) {
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var Bhop;
+(function (Bhop) {
+    var SeekOrigin;
     (function (SeekOrigin) {
         SeekOrigin[SeekOrigin["Begin"] = 0] = "Begin";
         SeekOrigin[SeekOrigin["Current"] = 1] = "Current";
         SeekOrigin[SeekOrigin["End"] = 2] = "End";
-    })(Gokz.SeekOrigin || (Gokz.SeekOrigin = {}));
-    var SeekOrigin = Gokz.SeekOrigin;
-    var BinaryReader = (function () {
+    })(SeekOrigin = Bhop.SeekOrigin || (Bhop.SeekOrigin = {}));
+    var BinaryReader = /** @class */ (function () {
         function BinaryReader(buffer) {
             this.buffer = buffer;
             this.view = new DataView(buffer);
@@ -50,61 +60,19 @@ var Gokz;
             this.offset += 4;
             return value;
         };
-        // http://www.onicos.com/staff/iz/amuse/javascript/expert/utf.txt
-        /* utf.js - UTF-8 <=> UTF-16 convertion
-        *
-        * Copyright (C) 1999 Masanao Izumo <iz@onicos.co.jp>
-        * Version: 1.0
-        * LastModified: Dec 25 1999
-        * This library is free.  You can redistribute it and/or modify it.
-        */
-        BinaryReader.utf8ArrayToStr = function (array) {
-            var out, i, len, c;
-            var char2, char3;
-            out = "";
-            len = array.length;
-            i = 0;
-            while (i < len) {
-                c = array[i++];
-                switch (c >> 4) {
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                        // 0xxxxxxx
-                        out += String.fromCharCode(c);
-                        break;
-                    case 12:
-                    case 13:
-                        // 110x xxxx   10xx xxxx
-                        char2 = array[i++];
-                        out += String.fromCharCode(((c & 0x1F) << 6) | (char2 & 0x3F));
-                        break;
-                    case 14:
-                        // 1110 xxxx  10xx xxxx  10xx xxxx
-                        char2 = array[i++];
-                        char3 = array[i++];
-                        out += String.fromCharCode(((c & 0x0F) << 12) |
-                            ((char2 & 0x3F) << 6) |
-                            ((char3 & 0x3F) << 0));
-                        break;
-                }
+        BinaryReader.prototype.readLine = function () {
+            var c, chars = "";
+            while ((c = this.readUint8()) !== 0x0a) {
+                chars += String.fromCharCode(c);
             }
-            return out;
+            return chars;
         };
-        BinaryReader.prototype.readString = function (length) {
-            if (length === undefined) {
-                length = this.readUint8();
+        BinaryReader.prototype.readString = function () {
+            var c, chars = "";
+            while ((c = this.readUint8()) !== 0x00) {
+                chars += String.fromCharCode(c);
             }
-            var chars = new Array(length);
-            for (var i = 0; i < length; ++i) {
-                chars[i] = this.readUint8();
-            }
-            return BinaryReader.utf8ArrayToStr(chars);
+            return chars;
         };
         BinaryReader.prototype.readVector2 = function (vec) {
             if (vec === undefined)
@@ -120,11 +88,11 @@ var Gokz;
         };
         return BinaryReader;
     }());
-    Gokz.BinaryReader = BinaryReader;
-})(Gokz || (Gokz = {}));
-var Gokz;
-(function (Gokz) {
-    var Event = (function () {
+    Bhop.BinaryReader = BinaryReader;
+})(Bhop || (Bhop = {}));
+var Bhop;
+(function (Bhop) {
+    var Event = /** @class */ (function () {
         function Event(sender) {
             this.handlers = [];
             this.sender = sender;
@@ -150,17 +118,18 @@ var Gokz;
         };
         return Event;
     }());
-    Gokz.Event = Event;
-    var ChangedEvent = (function (_super) {
+    Bhop.Event = Event;
+    var ChangedEvent = /** @class */ (function (_super) {
         __extends(ChangedEvent, _super);
         function ChangedEvent(sender, equalityComparison) {
-            _super.call(this, sender);
+            var _this = _super.call(this, sender) || this;
             if (equalityComparison != null) {
-                this.equalityComparison = equalityComparison;
+                _this.equalityComparison = equalityComparison;
             }
             else {
-                this.equalityComparison = function (a, b) { return a === b; };
+                _this.equalityComparison = function (a, b) { return a === b; };
             }
+            return _this;
         }
         ChangedEvent.prototype.reset = function () {
             this.prevValue = undefined;
@@ -173,17 +142,17 @@ var Gokz;
         };
         return ChangedEvent;
     }(Event));
-    Gokz.ChangedEvent = ChangedEvent;
-})(Gokz || (Gokz = {}));
-var Gokz;
-(function (Gokz) {
-    var KeyDisplay = (function () {
+    Bhop.ChangedEvent = ChangedEvent;
+})(Bhop || (Bhop = {}));
+var Bhop;
+(function (Bhop) {
+    var KeyDisplay = /** @class */ (function () {
         function KeyDisplay(viewer, container) {
             var _this = this;
             this.buttonMap = {};
             this.syncSampleRange = 4;
             this.speedSampleRange = 1 / 8;
-            this.tempTickData = new Gokz.TickData();
+            this.tempTickData = new Bhop.TickData();
             this.tempPosition = new Facepunch.Vector3();
             this.syncBuffer = [];
             this.syncIndex = 0;
@@ -196,13 +165,13 @@ var Gokz;
             element.classList.add("key-display");
             element.innerHTML = "\n                <div class=\"stat sync-outer\">Sync: <span class=\"value sync-value\">0.0</span> %</div>\n                <div class=\"stat speed-outer\">Speed: <span class=\"value speed-value\">000</span> u/s</div>\n                <div class=\"key key-w\">W</div>\n                <div class=\"key key-a\">A</div>\n                <div class=\"key key-s\">S</div>\n                <div class=\"key key-d\">D</div>\n                <div class=\"key key-walk\">Walk</div>\n                <div class=\"key key-duck\">Duck</div>\n                <div class=\"key key-jump\">Jump</div>";
             container.appendChild(element);
-            this.buttonMap[Gokz.Button.Forward] = element.getElementsByClassName("key-w")[0];
-            this.buttonMap[Gokz.Button.MoveLeft] = element.getElementsByClassName("key-a")[0];
-            this.buttonMap[Gokz.Button.Back] = element.getElementsByClassName("key-s")[0];
-            this.buttonMap[Gokz.Button.MoveRight] = element.getElementsByClassName("key-d")[0];
-            this.buttonMap[Gokz.Button.Walk] = element.getElementsByClassName("key-walk")[0];
-            this.buttonMap[Gokz.Button.Duck] = element.getElementsByClassName("key-duck")[0];
-            this.buttonMap[Gokz.Button.Jump] = element.getElementsByClassName("key-jump")[0];
+            this.buttonMap[Bhop.Button.Forward] = element.getElementsByClassName("key-w")[0];
+            this.buttonMap[Bhop.Button.MoveLeft] = element.getElementsByClassName("key-a")[0];
+            this.buttonMap[Bhop.Button.Back] = element.getElementsByClassName("key-s")[0];
+            this.buttonMap[Bhop.Button.MoveRight] = element.getElementsByClassName("key-d")[0];
+            this.buttonMap[Bhop.Button.Walk] = element.getElementsByClassName("key-walk")[0];
+            this.buttonMap[Bhop.Button.Duck] = element.getElementsByClassName("key-duck")[0];
+            this.buttonMap[Bhop.Button.Jump] = element.getElementsByClassName("key-jump")[0];
             this.syncValueElem = element.getElementsByClassName("sync-value")[0];
             this.speedValueElem = element.getElementsByClassName("speed-value")[0];
             viewer.showKeyDisplayChanged.addListener(function (showKeyDisplay) {
@@ -258,7 +227,7 @@ var Gokz;
             for (var i = min + 1; i <= max; ++i) {
                 var nextSpeed = this.getSpeedAtTick(i, 1);
                 // A bit gross
-                if ((this.tempTickData.flags & (Gokz.EntityFlag.OnGround | Gokz.EntityFlag.PartialGround)) === 0) {
+                if ((this.tempTickData.flags & (Bhop.EntityFlag.OnGround | Bhop.EntityFlag.PartialGround)) === 0) {
                     syncBuffer[this.syncIndex] = nextSpeed > prevSpeed;
                     this.syncIndex = this.syncIndex >= maxSamples - 1 ? 0 : this.syncIndex + 1;
                     this.syncSampleCount = Math.min(this.syncSampleCount + 1, maxSamples);
@@ -306,11 +275,11 @@ var Gokz;
         };
         return KeyDisplay;
     }());
-    Gokz.KeyDisplay = KeyDisplay;
-})(Gokz || (Gokz = {}));
-var Gokz;
-(function (Gokz) {
-    var OptionsMenu = (function () {
+    Bhop.KeyDisplay = KeyDisplay;
+})(Bhop || (Bhop = {}));
+var Bhop;
+(function (Bhop) {
+    var OptionsMenu = /** @class */ (function () {
         function OptionsMenu(viewer, container) {
             var _this = this;
             this.viewer = viewer;
@@ -385,11 +354,11 @@ var Gokz;
         };
         return OptionsMenu;
     }());
-    Gokz.OptionsMenu = OptionsMenu;
-})(Gokz || (Gokz = {}));
-var Gokz;
-(function (Gokz) {
-    var ReplayControls = (function () {
+    Bhop.OptionsMenu = OptionsMenu;
+})(Bhop || (Bhop = {}));
+var Bhop;
+(function (Bhop) {
+    var ReplayControls = /** @class */ (function () {
         function ReplayControls(viewer) {
             var _this = this;
             this.playbackBarVisible = true;
@@ -460,7 +429,7 @@ var Gokz;
                 _this.viewer.playbackRate = ReplayControls.speedSliderValues[_this.speedSliderElem.valueAsNumber];
             });
             viewer.replayLoaded.addListener(function (replay) {
-                _this.scrubberElem.max = replay.tickCount.toString();
+                _this.scrubberElem.max = replay.size.toString();
             });
             viewer.isPlayingChanged.addListener(function (isPlaying) {
                 _this.pauseElem.style.display = isPlaying ? "block" : "none";
@@ -535,20 +504,11 @@ var Gokz;
         ReplayControls.speedSliderValues = [-5, -1, 0.1, 0.25, 1, 2, 5, 10];
         return ReplayControls;
     }());
-    Gokz.ReplayControls = ReplayControls;
-})(Gokz || (Gokz = {}));
-var Gokz;
-(function (Gokz) {
-    (function (GlobalMode) {
-        GlobalMode[GlobalMode["Vanilla"] = 0] = "Vanilla";
-        GlobalMode[GlobalMode["KzSimple"] = 1] = "KzSimple";
-        GlobalMode[GlobalMode["KzTimer"] = 2] = "KzTimer";
-    })(Gokz.GlobalMode || (Gokz.GlobalMode = {}));
-    var GlobalMode = Gokz.GlobalMode;
-    (function (GlobalStyle) {
-        GlobalStyle[GlobalStyle["Normal"] = 0] = "Normal";
-    })(Gokz.GlobalStyle || (Gokz.GlobalStyle = {}));
-    var GlobalStyle = Gokz.GlobalStyle;
+    Bhop.ReplayControls = ReplayControls;
+})(Bhop || (Bhop = {}));
+var Bhop;
+(function (Bhop) {
+    var Button;
     (function (Button) {
         Button[Button["Attack"] = 1] = "Attack";
         Button[Button["Jump"] = 2] = "Jump";
@@ -575,8 +535,8 @@ var Gokz;
         Button[Button["BullRush"] = 4194304] = "BullRush";
         Button[Button["Grenade1"] = 8388608] = "Grenade1";
         Button[Button["Grenade2"] = 16777216] = "Grenade2";
-    })(Gokz.Button || (Gokz.Button = {}));
-    var Button = Gokz.Button;
+    })(Button = Bhop.Button || (Bhop.Button = {}));
+    var EntityFlag;
     (function (EntityFlag) {
         EntityFlag[EntityFlag["OnGround"] = 1] = "OnGround";
         EntityFlag[EntityFlag["Ducking"] = 2] = "Ducking";
@@ -610,9 +570,8 @@ var Gokz;
         EntityFlag[EntityFlag["TransRagdoll"] = 536870912] = "TransRagdoll";
         EntityFlag[EntityFlag["UnblockableByPlayer"] = 1073741824] = "UnblockableByPlayer";
         EntityFlag[EntityFlag["Freezing"] = -2147483648] = "Freezing";
-    })(Gokz.EntityFlag || (Gokz.EntityFlag = {}));
-    var EntityFlag = Gokz.EntityFlag;
-    var TickData = (function () {
+    })(EntityFlag = Bhop.EntityFlag || (Bhop.EntityFlag = {}));
+    var TickData = /** @class */ (function () {
         function TickData() {
             this.position = new Facepunch.Vector3();
             this.angles = new Facepunch.Vector2();
@@ -625,238 +584,219 @@ var Gokz;
         };
         return TickData;
     }());
-    Gokz.TickData = TickData;
-    var ReplayFile = (function () {
+    Bhop.TickData = TickData;
+    var ReplayFile = /** @class */ (function () {
         function ReplayFile(data) {
-            var reader = this.reader = new Gokz.BinaryReader(data);
-            var magic = reader.readInt32();
-            if (magic !== ReplayFile.MAGIC) {
-                throw "Unrecognised replay file format.";
-            }
-            this.formatVersion = reader.readUint8();
-            this.pluginVersion = reader.readString();
+            var reader = this.reader = new Bhop.BinaryReader(data);
+            this.header = reader.readLine();
             this.mapName = reader.readString();
-            this.course = reader.readInt32();
-            this.mode = reader.readInt32();
-            this.style = reader.readInt32();
+            this.style = reader.readUint8();
+            this.track = reader.readUint8();
+            this.preframes = reader.readInt32();
+            this.size = reader.readInt32();
             this.time = reader.readFloat32();
-            this.teleportsUsed = reader.readInt32();
-            this.steamId = reader.readInt32();
-            this.steamId2 = reader.readString();
-            reader.readString();
-            this.playerName = reader.readString();
-            this.tickCount = reader.readInt32();
-            this.tickRate = Math.round(this.tickCount / this.time); // todo
+            this.steamid = reader.readInt32();
+            this.tickRate = 128;
             this.firstTickOffset = reader.getOffset();
-            this.tickSize = 7 * 4;
+            this.tickSize = 8 * 4;
         }
         ReplayFile.prototype.getTickData = function (tick, data) {
             if (data === undefined)
                 data = new TickData();
             data.tick = tick;
             var reader = this.reader;
-            reader.seek(this.firstTickOffset + this.tickSize * tick, Gokz.SeekOrigin.Begin);
+            reader.seek(this.firstTickOffset + this.tickSize * tick, Bhop.SeekOrigin.Begin);
             reader.readVector3(data.position);
             reader.readVector2(data.angles);
             data.buttons = reader.readInt32();
             data.flags = reader.readInt32();
+            data.movetype = reader.readInt32();
             return data;
         };
         ReplayFile.prototype.clampTick = function (tick) {
-            return tick < 0 ? 0 : tick >= this.tickCount ? this.tickCount - 1 : tick;
+            return tick < 0 ? 0 : tick >= this.size ? this.size - 1 : tick;
         };
-        ReplayFile.MAGIC = 0x676F6B7A;
         return ReplayFile;
     }());
-    Gokz.ReplayFile = ReplayFile;
-})(Gokz || (Gokz = {}));
-///<reference path="../js/facepunch.webgame.d.ts"/>
-///<reference path="../js/sourceutils.d.ts"/>
+    Bhop.ReplayFile = ReplayFile;
+})(Bhop || (Bhop = {}));
+///<reference path="../src/js/facepunch.webgame.d.ts"/>
+///<reference path="../src/js/sourceutils.d.ts"/>
 var WebGame = Facepunch.WebGame;
-var Gokz;
-(function (Gokz) {
+var Bhop;
+(function (Bhop) {
     /**
      * Creates a GOKZ replay viewer applet.
      */
-    var ReplayViewer = (function (_super) {
+    var ReplayViewer = /** @class */ (function (_super) {
         __extends(ReplayViewer, _super);
         /**
          * Creates a new ReplayViewer inside the given `container` element.
          * @param container Element that should contain the viewer.
          */
         function ReplayViewer(container) {
-            var _this = this;
-            _super.call(this, container);
+            var _this = _super.call(this, container) || this;
             /**
              * If true, the current tick will be stored in the address hash when
              * playback is paused or the viewer uses the playback bar to skip
              * around.
              * @default `true`
              */
-            this.saveTickInHash = true;
+            _this.saveTickInHash = true;
             /**
              * The current tick being shown during playback, starting with 0 for
              * the first tick. Will automatically be increased while playing,
              * although some ticks might be skipped depending on playback speed and
              * frame rate. Can be set to skip to a particular tick.
              */
-            this.tick = -1;
+            _this.tick = -1;
             /**
              * Current playback rate, measured in seconds per second. Can support
              * negative values for rewinding.
              * @default `1.0`
              */
-            this.playbackRate = 1.0;
+            _this.playbackRate = 1.0;
             /**
              * If true, the replay will automatically loop back to the first tick
              * when it reaches the end.
              * @default `true`
              */
-            this.autoRepeat = true;
+            _this.autoRepeat = true;
             /**
              * Used internally to temporarily pause playback while the user is
              * dragging the scrubber in the playback bar.
              */
-            this.isScrubbing = false;
+            _this.isScrubbing = false;
             /**
              * If true, the currently displayed tick will advance based on the
              * value of `playbackRate`.
              * @default `false`
              */
-            this.isPlaying = false;
+            _this.isPlaying = false;
             /**
              * If true, a crosshair graphic will be displayed in the middle of the
              * viewer.
              * @default `true`
              */
-            this.showCrosshair = true;
+            _this.showCrosshair = true;
             /**
              * If true, makes the key press display visible.
              * @default `true`
              */
-            this.showKeyDisplay = true;
+            _this.showKeyDisplay = true;
             /**
              * If true, makes the options menu visible.
              * @default `false`
              */
-            this.showOptions = false;
+            _this.showOptions = false;
             /**
              * Event invoked when a new replay is loaded. Will be invoked before
              * the map for the replay is loaded (if required).
              *
              * **Available event arguments**:
-             * * `replay: Gokz.ReplayFile` - The newly loaded ReplayFile
-             * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+             * * `replay: Bhop.ReplayFile` - The newly loaded ReplayFile
+             * * `sender: Bhop.ReplayViewer` - This ReplayViewer
              */
-            this.replayLoaded = new Gokz.Event(this);
+            _this.replayLoaded = new Bhop.Event(_this);
             /**
              * Event invoked after each update.
              *
              * **Available event arguments**:
              * * `dt: number` - Time since the last update
-             * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+             * * `sender: Bhop.ReplayViewer` - This ReplayViewer
              */
-            this.updated = new Gokz.Event(this);
+            _this.updated = new Bhop.Event(_this);
             /**
              * Event invoked when the current tick has changed.
              *
              * **Available event arguments**:
-             * * `tickData: Gokz.TickData` - Recorded data for the current tick
-             * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+             * * `tickData: Bhop.TickData` - Recorded data for the current tick
+             * * `sender: Bhop.ReplayViewer` - This ReplayViewer
              */
-            this.tickChanged = new Gokz.ChangedEvent(this);
+            _this.tickChanged = new Bhop.ChangedEvent(_this);
             /**
              * Event invoked when playback has skipped to a different tick, for
              * example when the user uses the scrubber.
              *
              * **Available event arguments**:
              * * `oldTick: number` - The previous value of `tick` before skipping
-             * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+             * * `sender: Bhop.ReplayViewer` - This ReplayViewer
              */
-            this.playbackSkipped = new Gokz.Event(this);
+            _this.playbackSkipped = new Bhop.Event(_this);
             /**
              * Event invoked when `playbackRate` changes.
              *
              * **Available event arguments**:
              * * `playbackRate: number` - The new playback rate
-             * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+             * * `sender: Bhop.ReplayViewer` - This ReplayViewer
              */
-            this.playbackRateChanged = new Gokz.ChangedEvent(this);
+            _this.playbackRateChanged = new Bhop.ChangedEvent(_this);
             /**
              * Event invoked when `isPlaying` changes, for example when the user
              * pauses or resumes playback.
              *
              * **Available event arguments**:
              * * `isPlaying: boolean` - True if currently playing
-             * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+             * * `sender: Bhop.ReplayViewer` - This ReplayViewer
              */
-            this.isPlayingChanged = new Gokz.ChangedEvent(this);
+            _this.isPlayingChanged = new Bhop.ChangedEvent(_this);
             /**
              * Event invoked when `showCrosshair` changes.
              *
              * **Available event arguments**:
              * * `showCrosshair: boolean` - True if crosshair is now visible
-             * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+             * * `sender: Bhop.ReplayViewer` - This ReplayViewer
              */
-            this.showCrosshairChanged = new Gokz.ChangedEvent(this);
+            _this.showCrosshairChanged = new Bhop.ChangedEvent(_this);
             /**
              * Event invoked when `showKeyDisplay` changes.
              *
              * **Available event arguments**:
              * * `showKeyDisplay: boolean` - True if keyDisplay is now visible
-             * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+             * * `sender: Bhop.ReplayViewer` - This ReplayViewer
              */
-            this.showKeyDisplayChanged = new Gokz.ChangedEvent(this);
+            _this.showKeyDisplayChanged = new Bhop.ChangedEvent(_this);
             /**
              * Event invoked when `showOptions` changes.
              *
              * **Available event arguments**:
              * * `showOptions: boolean` - True if options menu is now visible
-             * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+             * * `sender: Bhop.ReplayViewer` - This ReplayViewer
              */
-            this.showOptionsChanged = new Gokz.ChangedEvent(this);
+            _this.showOptionsChanged = new Bhop.ChangedEvent(_this);
             /**
              * Event invoked when `cameraMode` changes.
              *
              * **Available event arguments**:
              * * `cameraMode: SourceUtils.CameraMode` - Camera mode value
-             * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+             * * `sender: Bhop.ReplayViewer` - This ReplayViewer
              */
-            this.cameraModeChanged = new Gokz.ChangedEvent(this);
-            this.pauseTime = 1.0;
-            this.spareTime = 0;
-            this.prevTick = undefined;
-            this.tickData = new Gokz.TickData();
-            this.tempTickData0 = new Gokz.TickData();
-            this.tempTickData1 = new Gokz.TickData();
-            this.tempTickData2 = new Gokz.TickData();
-            this.ignoreMouseUp = true;
-            this.saveCameraPosInHash = false;
-            this.controls = new Gokz.ReplayControls(this);
-            this.keyDisplay = new Gokz.KeyDisplay(this, this.controls.playbackBarElem);
-            this.options = new Gokz.OptionsMenu(this, this.controls.playbackBarElem);
+            _this.cameraModeChanged = new Bhop.ChangedEvent(_this);
+            _this.pauseTime = 1.0;
+            _this.spareTime = 0;
+            _this.prevTick = undefined;
+            _this.tickData = new Bhop.TickData();
+            _this.tempTickData0 = new Bhop.TickData();
+            _this.tempTickData1 = new Bhop.TickData();
+            _this.tempTickData2 = new Bhop.TickData();
+            _this.ignoreMouseUp = true;
+            _this.saveCameraPosInHash = false;
+            _this.controls = new Bhop.ReplayControls(_this);
+            _this.keyDisplay = new Bhop.KeyDisplay(_this, _this.controls.playbackBarElem);
+            _this.options = new Bhop.OptionsMenu(_this, _this.controls.playbackBarElem);
             var crosshair = document.createElement("div");
             crosshair.classList.add("crosshair");
             container.appendChild(crosshair);
-            this.showCrosshairChanged.addListener(function (showCrosshair) {
+            _this.showCrosshairChanged.addListener(function (showCrosshair) {
                 crosshair.hidden = !showCrosshair;
             });
-            this.isPlayingChanged.addListener(function (isPlaying) {
+            _this.isPlayingChanged.addListener(function (isPlaying) {
                 if (!isPlaying && _this.saveTickInHash)
                     _this.updateTickHash();
-                if (isPlaying) {
-                    _this.wakeLock = navigator.wakeLock;
-                    if (_this.wakeLock != null) {
-                        _this.wakeLock.request("display");
-                    }
+                if (isPlaying)
                     _this.cameraMode = SourceUtils.CameraMode.Fixed;
-                }
-                else if (_this.wakeLock != null) {
-                    _this.wakeLock.release("display");
-                    _this.wakeLock = null;
-                }
             });
-            this.cameraModeChanged.addListener(function (mode) {
+            _this.cameraModeChanged.addListener(function (mode) {
                 if (mode === SourceUtils.CameraMode.FreeCam) {
                     _this.isPlaying = false;
                 }
@@ -868,6 +808,7 @@ var Gokz;
                     document.exitPointerLock();
                 }
             });
+            return _this;
         }
         /**
          * Used to display an error message in the middle of the viewer.
@@ -904,7 +845,7 @@ var Gokz;
                         _this.routeLine = null;
                     }
                     try {
-                        _this.replay = new Gokz.ReplayFile(arrayBuffer);
+                        _this.replay = new Bhop.ReplayFile(arrayBuffer);
                     }
                     catch (e) {
                         _this.showMessage("Unable to read replay: " + e);
@@ -1031,7 +972,7 @@ var Gokz;
                 this.playbackSkipped.dispatch(this.prevTick);
             }
             if (this.routeLine == null && this.map.isReady()) {
-                this.routeLine = new Gokz.RouteLine(this.map, this.replay);
+                this.routeLine = new Bhop.RouteLine(this.map, this.replay);
             }
             if (this.map.isReady() && this.isPlaying && !this.isScrubbing) {
                 this.spareTime += dt * this.playbackRate;
@@ -1040,7 +981,7 @@ var Gokz;
                 while (this.spareTime > tickPeriod) {
                     this.spareTime -= tickPeriod;
                     this.tick += 1;
-                    if (this.tick > replay.tickCount + this.pauseTicks * 2) {
+                    if (this.tick > replay.size + this.pauseTicks * 2) {
                         this.tick = -this.pauseTicks;
                     }
                 }
@@ -1049,7 +990,7 @@ var Gokz;
                     this.spareTime += tickPeriod;
                     this.tick -= 1;
                     if (this.tick < -this.pauseTicks * 2) {
-                        this.tick = replay.tickCount + this.pauseTicks;
+                        this.tick = replay.size + this.pauseTicks;
                     }
                 }
             }
@@ -1066,9 +1007,9 @@ var Gokz;
                 var d1 = this.tickData;
                 var d2 = replay.getTickData(replay.clampTick(this.tick + 1), this.tempTickData1);
                 var d3 = replay.getTickData(replay.clampTick(this.tick + 2), this.tempTickData2);
-                Gokz.Utils.hermitePosition(d0.position, d1.position, d2.position, d3.position, t, this.tickData.position);
-                Gokz.Utils.hermiteAngles(d0.angles, d1.angles, d2.angles, d3.angles, t, this.tickData.angles);
-                eyeHeight = Gokz.Utils.hermiteValue(d0.getEyeHeight(), d1.getEyeHeight(), d2.getEyeHeight(), d3.getEyeHeight(), t);
+                Bhop.Utils.hermitePosition(d0.position, d1.position, d2.position, d3.position, t, this.tickData.position);
+                Bhop.Utils.hermiteAngles(d0.angles, d1.angles, d2.angles, d3.angles, t, this.tickData.angles);
+                eyeHeight = Bhop.Utils.hermiteValue(d0.getEyeHeight(), d1.getEyeHeight(), d2.getEyeHeight(), d3.getEyeHeight(), t);
             }
             if (this.cameraMode === SourceUtils.CameraMode.Fixed) {
                 this.mainCamera.setPosition(this.tickData.position.x, this.tickData.position.y, this.tickData.position.z + eyeHeight);
@@ -1078,24 +1019,24 @@ var Gokz;
         };
         return ReplayViewer;
     }(SourceUtils.MapViewer));
-    Gokz.ReplayViewer = ReplayViewer;
-})(Gokz || (Gokz = {}));
-var Gokz;
-(function (Gokz) {
-    var RouteLine = (function (_super) {
+    Bhop.ReplayViewer = ReplayViewer;
+})(Bhop || (Bhop = {}));
+var Bhop;
+(function (Bhop) {
+    var RouteLine = /** @class */ (function (_super) {
         __extends(RouteLine, _super);
         function RouteLine(map, replay) {
-            _super.call(this, map, { classname: "route_line", clusters: null });
-            this.isVisible = false;
-            this.segments = new Array(Math.ceil(replay.tickCount / RouteLine.segmentTicks));
-            var tickData = new Gokz.TickData();
+            var _this = _super.call(this, map, { classname: "route_line", clusters: null }) || this;
+            _this.isVisible = false;
+            _this.segments = new Array(Math.ceil(replay.size / RouteLine.segmentTicks));
+            var tickData = new Bhop.TickData();
             var progressScale = 16 / replay.tickRate;
             var lastPos = new Facepunch.Vector3();
             var currPos = new Facepunch.Vector3();
-            for (var i = 0; i < this.segments.length; ++i) {
+            for (var i = 0; i < _this.segments.length; ++i) {
                 var firstTick = i * RouteLine.segmentTicks;
-                var lastTick = Math.min((i + 1) * RouteLine.segmentTicks, replay.tickCount - 1);
-                var segment = this.segments[i] = {
+                var lastTick = Math.min((i + 1) * RouteLine.segmentTicks, replay.size - 1);
+                var segment = _this.segments[i] = {
                     debugLine: new WebGame.DebugLine(map.viewer),
                     clusters: {}
                 };
@@ -1124,6 +1065,7 @@ var Gokz;
                 }
                 debugLine.update();
             }
+            return _this;
         }
         Object.defineProperty(RouteLine.prototype, "visible", {
             get: function () {
@@ -1141,7 +1083,7 @@ var Gokz;
                 }
                 this.map.viewer.forceDrawListInvalidation(true);
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         RouteLine.prototype.onPopulateDrawList = function (drawList, clusters) {
@@ -1172,11 +1114,11 @@ var Gokz;
         RouteLine.segmentTicks = 60 * 128;
         return RouteLine;
     }(SourceUtils.Entities.PvsEntity));
-    Gokz.RouteLine = RouteLine;
-})(Gokz || (Gokz = {}));
-var Gokz;
-(function (Gokz) {
-    var Utils = (function () {
+    Bhop.RouteLine = RouteLine;
+})(Bhop || (Bhop = {}));
+var Bhop;
+(function (Bhop) {
+    var Utils = /** @class */ (function () {
         function Utils() {
         }
         Utils.deltaAngle = function (a, b) {
@@ -1201,5 +1143,5 @@ var Gokz;
         };
         return Utils;
     }());
-    Gokz.Utils = Utils;
-})(Gokz || (Gokz = {}));
+    Bhop.Utils = Utils;
+})(Bhop || (Bhop = {}));

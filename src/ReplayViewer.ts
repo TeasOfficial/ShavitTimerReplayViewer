@@ -1,9 +1,9 @@
-///<reference path="../js/facepunch.webgame.d.ts"/>
-///<reference path="../js/sourceutils.d.ts"/>
+///<reference path="../src/js/facepunch.webgame.d.ts"/>
+///<reference path="../src/js/sourceutils.d.ts"/>
 
 import WebGame = Facepunch.WebGame;
 
-namespace Gokz {
+namespace Bhop {
     /**
      * Address hash format for the ReplayViewer.
      */
@@ -114,8 +114,8 @@ namespace Gokz {
          * the map for the replay is loaded (if required).
          * 
          * **Available event arguments**:
-         * * `replay: Gokz.ReplayFile` - The newly loaded ReplayFile
-         * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+         * * `replay: Bhop.ReplayFile` - The newly loaded ReplayFile
+         * * `sender: Bhop.ReplayViewer` - This ReplayViewer
          */
         readonly replayLoaded = new Event<ReplayFile, ReplayViewer>(this);
 
@@ -124,7 +124,7 @@ namespace Gokz {
          * 
          * **Available event arguments**:
          * * `dt: number` - Time since the last update
-         * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+         * * `sender: Bhop.ReplayViewer` - This ReplayViewer
          */
         readonly updated = new Event<number, ReplayViewer>(this);
 
@@ -132,8 +132,8 @@ namespace Gokz {
          * Event invoked when the current tick has changed.
          * 
          * **Available event arguments**:
-         * * `tickData: Gokz.TickData` - Recorded data for the current tick
-         * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+         * * `tickData: Bhop.TickData` - Recorded data for the current tick
+         * * `sender: Bhop.ReplayViewer` - This ReplayViewer
          */
         readonly tickChanged = new ChangedEvent<number, TickData, ReplayViewer>(this);
 
@@ -143,7 +143,7 @@ namespace Gokz {
          * 
          * **Available event arguments**:
          * * `oldTick: number` - The previous value of `tick` before skipping
-         * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+         * * `sender: Bhop.ReplayViewer` - This ReplayViewer
          */
         readonly playbackSkipped = new Event<number, ReplayViewer>(this);
 
@@ -152,7 +152,7 @@ namespace Gokz {
          * 
          * **Available event arguments**:
          * * `playbackRate: number` - The new playback rate
-         * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+         * * `sender: Bhop.ReplayViewer` - This ReplayViewer
          */
         readonly playbackRateChanged = new ChangedEvent<number, number, ReplayViewer>(this);
 
@@ -162,7 +162,7 @@ namespace Gokz {
          * 
          * **Available event arguments**:
          * * `isPlaying: boolean` - True if currently playing
-         * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+         * * `sender: Bhop.ReplayViewer` - This ReplayViewer
          */
         readonly isPlayingChanged = new ChangedEvent<boolean, boolean, ReplayViewer>(this);
 
@@ -171,7 +171,7 @@ namespace Gokz {
          * 
          * **Available event arguments**:
          * * `showCrosshair: boolean` - True if crosshair is now visible
-         * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+         * * `sender: Bhop.ReplayViewer` - This ReplayViewer
          */
         readonly showCrosshairChanged = new ChangedEvent<boolean, boolean, ReplayViewer>(this);
 
@@ -180,7 +180,7 @@ namespace Gokz {
          * 
          * **Available event arguments**:
          * * `showKeyDisplay: boolean` - True if keyDisplay is now visible
-         * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+         * * `sender: Bhop.ReplayViewer` - This ReplayViewer
          */
         readonly showKeyDisplayChanged = new ChangedEvent<boolean, boolean, ReplayViewer>(this);
 
@@ -189,7 +189,7 @@ namespace Gokz {
          * 
          * **Available event arguments**:
          * * `showOptions: boolean` - True if options menu is now visible
-         * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+         * * `sender: Bhop.ReplayViewer` - This ReplayViewer
          */
         readonly showOptionsChanged = new ChangedEvent<boolean, boolean, ReplayViewer>(this);
 
@@ -198,7 +198,7 @@ namespace Gokz {
          * 
          * **Available event arguments**:
          * * `cameraMode: SourceUtils.CameraMode` - Camera mode value
-         * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+         * * `sender: Bhop.ReplayViewer` - This ReplayViewer
          */
         readonly cameraModeChanged = new ChangedEvent<SourceUtils.CameraMode, SourceUtils.CameraMode, ReplayViewer>(this);
 
@@ -209,8 +209,6 @@ namespace Gokz {
 
         private pauseTime = 1.0;
         private pauseTicks: number;
-
-        private wakeLock: any;
 
         private spareTime = 0;
         private prevTick: number = undefined;
@@ -245,19 +243,11 @@ namespace Gokz {
             });
 
             this.isPlayingChanged.addListener(isPlaying => {
-                if (!isPlaying && this.saveTickInHash) this.updateTickHash();
+                if (!isPlaying && this.saveTickInHash) 
+					this.updateTickHash();
 
-                if (isPlaying) {
-                    this.wakeLock = (navigator as any).wakeLock;
-                    if (this.wakeLock != null) {
-                        this.wakeLock.request("display");
-                    }
-
+                if (isPlaying)
                     this.cameraMode = SourceUtils.CameraMode.Fixed;
-                } else if (this.wakeLock != null) {
-                    this.wakeLock.release("display");
-                    this.wakeLock = null;
-                }
             });
 
             this.cameraModeChanged.addListener(mode => {
@@ -487,7 +477,7 @@ namespace Gokz {
                     this.spareTime -= tickPeriod;
                     this.tick += 1;
 
-                    if (this.tick > replay.tickCount + this.pauseTicks * 2) {
+                    if (this.tick > replay.size + this.pauseTicks * 2) {
                         this.tick = -this.pauseTicks;
                     }
                 }
@@ -498,7 +488,7 @@ namespace Gokz {
                     this.tick -= 1;
 
                     if (this.tick < -this.pauseTicks * 2) {
-                        this.tick = replay.tickCount + this.pauseTicks;
+                        this.tick = replay.size + this.pauseTicks;
                     }
                 }
             } else {

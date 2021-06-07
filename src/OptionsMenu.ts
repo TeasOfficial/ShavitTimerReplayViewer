@@ -1,4 +1,4 @@
-namespace Gokz {
+namespace Bhop {
     export class OptionsMenu {
         private readonly viewer: ReplayViewer;
 

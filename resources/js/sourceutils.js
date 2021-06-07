@@ -1067,6 +1067,7 @@ var SourceUtils;
                         + this.dispGeometryLoader.getLoadProgress() * 0.5;
                     var propsLoaded = this.vertLightingLoader.getLoadProgress() * 0.25
                         + this.studioModelLoader.getLoadProgress() * 0.75;
+						
                     this.totalLoadProgress = (visLoaded + bspLoaded + lightmapLoaded + materialsLoaded + geomLoaded + propsLoaded) / 6;
                     if (this.showDebugPanel) {
                         this.onSetDebugText("debug-loadpercent", (this.totalLoadProgress * 100).toPrecision(3));

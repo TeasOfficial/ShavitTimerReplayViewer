@@ -1,10 +1,10 @@
 /// <reference path="facepunch.webgame.d.ts" />
 /// <reference path="sourceutils.d.ts" />
-declare namespace Gokz {
+declare namespace Bhop {
     enum SeekOrigin {
         Begin = 0,
         Current = 1,
-        End = 2,
+        End = 2
     }
     class BinaryReader {
         private readonly buffer;
@@ -17,13 +17,13 @@ declare namespace Gokz {
         readInt32(): number;
         readUint32(): number;
         readFloat32(): number;
-        static utf8ArrayToStr(array: number[]): string;
-        readString(length?: number): string;
+        readLine(): string;
+        readString(): string;
         readVector2(vec?: Facepunch.Vector2): Facepunch.Vector2;
         readVector3(vec?: Facepunch.Vector3): Facepunch.Vector3;
     }
 }
-declare namespace Gokz {
+declare namespace Bhop {
     type Handler<TEventArgs, TSender> = (args: TEventArgs, sender: TSender) => void;
     class Event<TEventArgs, TSender> {
         private readonly sender;
@@ -42,7 +42,7 @@ declare namespace Gokz {
         update(value: TValue, args?: TEventArgs): void;
     }
 }
-declare namespace Gokz {
+declare namespace Bhop {
     class KeyDisplay {
         private readonly viewer;
         private readonly element;
@@ -52,21 +52,21 @@ declare namespace Gokz {
         syncSampleRange: number;
         speedSampleRange: number;
         constructor(viewer: ReplayViewer, container?: HTMLElement);
-        private updateButtons(tickData);
+        private updateButtons;
         private readonly tempTickData;
         private readonly tempPosition;
         private syncBuffer;
         private syncIndex;
         private syncSampleCount;
         private lastTick;
-        private updateSync();
-        private getSpeedAtTick(tick, tickRange);
-        private updateSpeed();
+        private updateSync;
+        private getSpeedAtTick;
+        private updateSpeed;
         show(): void;
         hide(): void;
     }
 }
-declare namespace Gokz {
+declare namespace Bhop {
     class OptionsMenu {
         private readonly viewer;
         readonly element: HTMLElement;
@@ -75,13 +75,13 @@ declare namespace Gokz {
         constructor(viewer: ReplayViewer, container?: HTMLElement);
         show(): void;
         hide(): void;
-        private clear();
-        private showMainPage();
-        private setTitle(title);
-        private addToggleOption<TArgs, TSender>(label, getter, setter, changed?);
+        private clear;
+        private showMainPage;
+        private setTitle;
+        private addToggleOption;
     }
 }
-declare namespace Gokz {
+declare namespace Bhop {
     class ReplayControls {
         private static readonly speedSliderValues;
         private readonly viewer;
@@ -109,15 +109,7 @@ declare namespace Gokz {
         showSettings(): void;
     }
 }
-declare namespace Gokz {
-    enum GlobalMode {
-        Vanilla = 0,
-        KzSimple = 1,
-        KzTimer = 2,
-    }
-    enum GlobalStyle {
-        Normal = 0,
-    }
+declare namespace Bhop {
     enum Button {
         Attack = 1,
         Jump = 2,
@@ -143,7 +135,7 @@ declare namespace Gokz {
         Weapon2 = 2097152,
         BullRush = 4194304,
         Grenade1 = 8388608,
-        Grenade2 = 16777216,
+        Grenade2 = 16777216
     }
     enum EntityFlag {
         OnGround = 1,
@@ -177,7 +169,7 @@ declare namespace Gokz {
         Dissolving = 268435456,
         TransRagdoll = 536870912,
         UnblockableByPlayer = 1073741824,
-        Freezing = -2147483648,
+        Freezing = -2147483648
     }
     class TickData {
         readonly position: Facepunch.Vector3;
@@ -185,33 +177,29 @@ declare namespace Gokz {
         tick: number;
         buttons: Button;
         flags: EntityFlag;
+        movetype: number;
         getEyeHeight(): number;
     }
     class ReplayFile {
-        static readonly MAGIC: number;
         private readonly reader;
         private readonly firstTickOffset;
         private readonly tickSize;
-        readonly formatVersion: number;
-        readonly pluginVersion: string;
+        readonly header: string;
         readonly mapName: string;
-        readonly course: number;
-        readonly mode: GlobalMode;
-        readonly style: GlobalStyle;
+        readonly style: number;
+        readonly track: number;
         readonly time: number;
-        readonly teleportsUsed: number;
-        readonly steamId: number;
-        readonly steamId2: string;
-        readonly playerName: string;
-        readonly tickCount: number;
+        readonly steamid: number;
         readonly tickRate: number;
+        readonly preframes: number;
+        readonly size: number;
         constructor(data: ArrayBuffer);
         getTickData(tick: number, data?: TickData): TickData;
         clampTick(tick: number): number;
     }
 }
 import WebGame = Facepunch.WebGame;
-declare namespace Gokz {
+declare namespace Bhop {
     /**
      * Address hash format for the ReplayViewer.
      */
@@ -307,8 +295,8 @@ declare namespace Gokz {
          * the map for the replay is loaded (if required).
          *
          * **Available event arguments**:
-         * * `replay: Gokz.ReplayFile` - The newly loaded ReplayFile
-         * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+         * * `replay: Bhop.ReplayFile` - The newly loaded ReplayFile
+         * * `sender: Bhop.ReplayViewer` - This ReplayViewer
          */
         readonly replayLoaded: Event<ReplayFile, ReplayViewer>;
         /**
@@ -316,15 +304,15 @@ declare namespace Gokz {
          *
          * **Available event arguments**:
          * * `dt: number` - Time since the last update
-         * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+         * * `sender: Bhop.ReplayViewer` - This ReplayViewer
          */
         readonly updated: Event<number, ReplayViewer>;
         /**
          * Event invoked when the current tick has changed.
          *
          * **Available event arguments**:
-         * * `tickData: Gokz.TickData` - Recorded data for the current tick
-         * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+         * * `tickData: Bhop.TickData` - Recorded data for the current tick
+         * * `sender: Bhop.ReplayViewer` - This ReplayViewer
          */
         readonly tickChanged: ChangedEvent<number, TickData, ReplayViewer>;
         /**
@@ -333,7 +321,7 @@ declare namespace Gokz {
          *
          * **Available event arguments**:
          * * `oldTick: number` - The previous value of `tick` before skipping
-         * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+         * * `sender: Bhop.ReplayViewer` - This ReplayViewer
          */
         readonly playbackSkipped: Event<number, ReplayViewer>;
         /**
@@ -341,7 +329,7 @@ declare namespace Gokz {
          *
          * **Available event arguments**:
          * * `playbackRate: number` - The new playback rate
-         * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+         * * `sender: Bhop.ReplayViewer` - This ReplayViewer
          */
         readonly playbackRateChanged: ChangedEvent<number, number, ReplayViewer>;
         /**
@@ -350,7 +338,7 @@ declare namespace Gokz {
          *
          * **Available event arguments**:
          * * `isPlaying: boolean` - True if currently playing
-         * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+         * * `sender: Bhop.ReplayViewer` - This ReplayViewer
          */
         readonly isPlayingChanged: ChangedEvent<boolean, boolean, ReplayViewer>;
         /**
@@ -358,7 +346,7 @@ declare namespace Gokz {
          *
          * **Available event arguments**:
          * * `showCrosshair: boolean` - True if crosshair is now visible
-         * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+         * * `sender: Bhop.ReplayViewer` - This ReplayViewer
          */
         readonly showCrosshairChanged: ChangedEvent<boolean, boolean, ReplayViewer>;
         /**
@@ -366,7 +354,7 @@ declare namespace Gokz {
          *
          * **Available event arguments**:
          * * `showKeyDisplay: boolean` - True if keyDisplay is now visible
-         * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+         * * `sender: Bhop.ReplayViewer` - This ReplayViewer
          */
         readonly showKeyDisplayChanged: ChangedEvent<boolean, boolean, ReplayViewer>;
         /**
@@ -374,7 +362,7 @@ declare namespace Gokz {
          *
          * **Available event arguments**:
          * * `showOptions: boolean` - True if options menu is now visible
-         * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+         * * `sender: Bhop.ReplayViewer` - This ReplayViewer
          */
         readonly showOptionsChanged: ChangedEvent<boolean, boolean, ReplayViewer>;
         /**
@@ -382,7 +370,7 @@ declare namespace Gokz {
          *
          * **Available event arguments**:
          * * `cameraMode: SourceUtils.CameraMode` - Camera mode value
-         * * `sender: Gokz.ReplayViewer` - This ReplayViewer
+         * * `sender: Bhop.ReplayViewer` - This ReplayViewer
          */
         readonly cameraModeChanged: ChangedEvent<SourceUtils.CameraMode, SourceUtils.CameraMode, ReplayViewer>;
         private messageElem;
@@ -390,7 +378,6 @@ declare namespace Gokz {
         private currentMapName;
         private pauseTime;
         private pauseTicks;
-        private wakeLock;
         private spareTime;
         private prevTick;
         private tickData;
@@ -430,18 +417,19 @@ declare namespace Gokz {
         protected onUpdateFrame(dt: number): void;
     }
 }
-declare namespace Gokz {
+declare namespace Bhop {
     class RouteLine extends SourceUtils.Entities.PvsEntity {
         private static readonly segmentTicks;
         private readonly segments;
         private isVisible;
-        visible: boolean;
+        get visible(): boolean;
+        set visible(value: boolean);
         constructor(map: SourceUtils.Map, replay: ReplayFile);
         protected onPopulateDrawList(drawList: WebGame.DrawList, clusters: number[]): void;
         dispose(): void;
     }
 }
-declare namespace Gokz {
+declare namespace Bhop {
     class Utils {
         static deltaAngle(a: number, b: number): number;
         static hermiteValue(p0: number, p1: number, p2: number, p3: number, t: number): number;

@@ -1,14 +1,4 @@
-namespace Gokz {
-    export enum GlobalMode {
-        Vanilla = 0,
-        KzSimple = 1,
-        KzTimer = 2
-    }
-
-    export enum GlobalStyle {
-        Normal = 0
-    }
-
+namespace Bhop {
     export enum Button {
         Attack = 1 << 0,
         Jump = 1 << 1,
@@ -78,6 +68,7 @@ namespace Gokz {
         tick = -1;
         buttons: Button = 0;
         flags: EntityFlag = 0;
+		movetype: number;
 
         getEyeHeight(): number {
             return (this.flags & EntityFlag.Ducking) != 0 ? 46 : 64;
@@ -85,53 +76,35 @@ namespace Gokz {
     }
 
     export class ReplayFile {
-        static readonly MAGIC = 0x676F6B7A;
-
         private readonly reader: BinaryReader;
         private readonly firstTickOffset: number;
         private readonly tickSize: number;
 
-        readonly formatVersion: number;
-        readonly pluginVersion: string;
-
+		readonly header: string;
         readonly mapName: string;
-        readonly course: number;
-        readonly mode: GlobalMode;
-        readonly style: GlobalStyle;
+        readonly style: number;
+		readonly track: number;
         readonly time: number;
-        readonly teleportsUsed: number;
-        readonly steamId: number;
-        readonly steamId2: string;
-        readonly playerName: string;
-        readonly tickCount: number;
+        readonly steamid: number;
         readonly tickRate: number;
+		readonly preframes: number;
+		readonly size: number;
 
         constructor(data: ArrayBuffer) {
             const reader = this.reader = new BinaryReader(data);
 
-            const magic = reader.readInt32();
-            if (magic !== ReplayFile.MAGIC) {
-                throw "Unrecognised replay file format.";
-            }
-
-            this.formatVersion = reader.readUint8();
-            this.pluginVersion = reader.readString();
-
-            this.mapName = reader.readString();
-            this.course = reader.readInt32();
-            this.mode = reader.readInt32() as GlobalMode;
-            this.style = reader.readInt32() as GlobalStyle;
-            this.time = reader.readFloat32();
-            this.teleportsUsed = reader.readInt32();
-            this.steamId = reader.readInt32();
-            this.steamId2 = reader.readString();
-            reader.readString();
-            this.playerName = reader.readString();
-            this.tickCount = reader.readInt32();
-            this.tickRate = Math.round(this.tickCount / this.time); // todo
-
-            this.firstTickOffset = reader.getOffset();
-            this.tickSize = 7 * 4;
+            this.header = reader.readLine();
+			this.mapName = reader.readString();
+            this.style = reader.readUint8();
+            this.track = reader.readUint8(); 
+			this.preframes = reader.readInt32();
+			this.size = reader.readInt32();
+			this.time = reader.readFloat32();
+			this.steamid = reader.readInt32();
+			
+			this.tickRate = 128;
+			this.firstTickOffset = reader.getOffset();
+			this.tickSize = 8 * 4;
         }
 
         getTickData(tick: number, data?: TickData): TickData {
@@ -146,12 +119,13 @@ namespace Gokz {
             reader.readVector2(data.angles);
             data.buttons = reader.readInt32();
             data.flags = reader.readInt32();
-
+			data.movetype = reader.readInt32();
+			
             return data;
         }
 
         clampTick(tick: number): number {
-            return tick < 0 ? 0 : tick >= this.tickCount ? this.tickCount - 1 : tick;
+            return tick < 0 ? 0 : tick >= this.size ? this.size - 1 : tick;
         }
     }
 }
