@@ -55,19 +55,19 @@ namespace Bhop {
             return value;
         }
 		
-		readLine(): string {
+	readLine(): string {
             let c, chars = "";
             while((c = this.readUint8()) !== 0x0a){
-				chars += String.fromCharCode(c);
+		chars += String.fromCharCode(c);
             }
 
             return chars;
         }
 		
-		readString(): string {
+	readString(): string {
             let c, chars = "";
             while((c = this.readUint8()) !== 0x00){
-				chars += String.fromCharCode(c);
+		chars += String.fromCharCode(c);
             }
 
             return chars;
