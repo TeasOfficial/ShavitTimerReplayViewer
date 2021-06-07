@@ -68,7 +68,7 @@ namespace Bhop {
         tick = -1;
         buttons: Button = 0;
         flags: EntityFlag = 0;
-		movetype: number;
+	movetype: number;
 
         getEyeHeight(): number {
             return (this.flags & EntityFlag.Ducking) != 0 ? 46 : 64;
@@ -80,52 +80,52 @@ namespace Bhop {
         private readonly firstTickOffset: number;
         private readonly tickSize: number;
 
-		readonly header: string;
+	readonly header: string;
         readonly mapName: string;
         readonly style: number;
-		readonly track: number;
+	readonly track: number;
         readonly time: number;
         readonly steamid: number;
         readonly tickRate: number;
-		readonly preframes: number;
-		readonly size: number;
+	readonly preframes: number;
+	readonly size: number;
 
         constructor(data: ArrayBuffer) {
-            const reader = this.reader = new BinaryReader(data);
+		const reader = this.reader = new BinaryReader(data);
 
-            this.header = reader.readLine();
-			this.mapName = reader.readString();
-            this.style = reader.readUint8();
-            this.track = reader.readUint8(); 
-			this.preframes = reader.readInt32();
-			this.size = reader.readInt32();
-			this.time = reader.readFloat32();
-			this.steamid = reader.readInt32();
-			
-			this.tickRate = 128;
-			this.firstTickOffset = reader.getOffset();
-			this.tickSize = 8 * 4;
+		this.header = reader.readLine();
+		this.mapName = reader.readString();
+		this.style = reader.readUint8();
+		this.track = reader.readUint8(); 
+		this.preframes = reader.readInt32();
+		this.size = reader.readInt32();
+		this.time = reader.readFloat32();
+		this.steamid = reader.readInt32();
+
+		this.tickRate = 128;
+		this.firstTickOffset = reader.getOffset();
+		this.tickSize = 8 * 4;
         }
 
-        getTickData(tick: number, data?: TickData): TickData {
-            if (data === undefined) data = new TickData();
+	getTickData(tick: number, data?: TickData): TickData {
+		if (data === undefined) data = new TickData();
 
-            data.tick = tick;
+		data.tick = tick;
 
-            const reader = this.reader;
-            reader.seek(this.firstTickOffset + this.tickSize * tick, SeekOrigin.Begin);
+		const reader = this.reader;
+		reader.seek(this.firstTickOffset + this.tickSize * tick, SeekOrigin.Begin);
 
-            reader.readVector3(data.position);
-            reader.readVector2(data.angles);
-            data.buttons = reader.readInt32();
-            data.flags = reader.readInt32();
-			data.movetype = reader.readInt32();
+		reader.readVector3(data.position);
+		reader.readVector2(data.angles);
+		data.buttons = reader.readInt32();
+		data.flags = reader.readInt32();
+		data.movetype = reader.readInt32();
 			
-            return data;
+		return data;
         }
 
         clampTick(tick: number): number {
-            return tick < 0 ? 0 : tick >= this.size ? this.size - 1 : tick;
+		return tick < 0 ? 0 : tick >= this.size ? this.size - 1 : tick;
         }
     }
 }
