@@ -592,7 +592,7 @@ var Bhop;
             this.mapName = reader.readString();
 
             if(this.mapName.indexOf("surf_") == 0 && this.header == "10:{SHAVITREPLAYFORMAT}{FINAL}"){
-                console.log("Surf Map. Use shavit-surf-timer.");
+                console.log("Surf Map. Use shavit-surf-timer version 10.");
                 this.style = reader.readUint8();
                 this.track = reader.readUint8();
                 this.preframes = reader.readInt32();
@@ -601,6 +601,23 @@ var Bhop;
                 this.steamid = reader.readInt32();
                 this.tickRate = 66;
                 this.firstTickOffset = reader.getOffset() + 17;
+                this.tickSize = 44;
+                document.getElementsByClassName("sync-outer")[0].classList.add("surf");
+                document.getElementsByClassName("speed-outer")[0].classList.add("surf");
+                document.getElementsByClassName("speed-outer")[0].classList.remove("stat");
+            }else
+            if(this.mapName.indexOf("surf_") == 0 && this.header == "11:{SHAVITREPLAYFORMAT}{FINAL}"){
+                console.log("Surf Map. Use shavit-surf-timer version 11.");
+                this.style = reader.readUint8();
+                this.track = reader.readUint8();
+                this.preframes = reader.readInt32();
+                this.size = reader.readInt32() + 64 * 4;
+                this.time = reader.readFloat32();
+                this.steamid = reader.readInt32();
+                
+
+                this.tickRate = 66;
+                this.firstTickOffset = reader.getOffset() + 10;
                 this.tickSize = 44;
                 document.getElementsByClassName("sync-outer")[0].classList.add("surf");
                 document.getElementsByClassName("speed-outer")[0].classList.add("surf");
