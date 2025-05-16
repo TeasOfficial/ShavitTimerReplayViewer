@@ -163,7 +163,9 @@ var Bhop;
                 container = viewer.container;
             var element = this.element = document.createElement("div");
             element.classList.add("key-display");
+
             element.innerHTML = "\n                <div class=\"stat sync-outer\">同步率: <span class=\"value sync-value\">0.0</span> %</div>\n                <div class=\"stat speed-outer\">速度: <span class=\"value speed-value\">000</span> u/s</div>\n                <div class=\"key key-w\">W</div>\n                <div class=\"key key-a\">A</div>\n                <div class=\"key key-s\">S</div>\n                <div class=\"key key-d\">D</div>\n                <div class=\"key key-walk\">静步</div>\n                <div class=\"key key-duck\">蹲</div>\n                <div class=\"key key-jump\">跳跃</div>";
+
             container.appendChild(element);
             this.buttonMap[Bhop.Button.Forward] = element.getElementsByClassName("key-w")[0];
             this.buttonMap[Bhop.Button.MoveLeft] = element.getElementsByClassName("key-a")[0];
@@ -588,39 +590,57 @@ var Bhop;
             var reader = this.reader = new Bhop.BinaryReader(data);
             this.header = reader.readLine();
             this.mapName = reader.readString();
-            this.style = reader.readUint8();
-            this.track = reader.readUint8();
-            this.preframes = reader.readInt32();
-            this.size = reader.readInt32() + (64 * 4);
-            this.time = reader.readFloat32();
-            this.steamid = reader.readInt32();
-            /*
-                CS:Source is 100 tick
-                CS:GO is 128tick
-            */
-            this.tickRate = 100;
-            /*
-                CS:Source Need add 16
-            */
-            this.firstTickOffset = reader.getOffset() + 16;
-            /*
-                CS:Source is 40
-                CS:GO is 32
-            */
-            this.tickSize = 40;
+
+            if(this.mapName.indexOf("surf_") == 0 && this.header == "10:{SHAVITREPLAYFORMAT}{FINAL}"){
+                console.log("Surf Map. Use shavit-surf-timer.");
+                this.style = reader.readUint8();
+                this.track = reader.readUint8();
+                this.preframes = reader.readInt32();
+                this.size = reader.readInt32() + 64 * 4;
+                this.time = reader.readFloat32();
+                this.steamid = reader.readInt32();
+                this.tickRate = 66;
+                this.firstTickOffset = reader.getOffset() + 17;
+                this.tickSize = 44;
+                document.getElementsByClassName("sync-outer")[0].classList.add("surf");
+                document.getElementsByClassName("speed-outer")[0].classList.add("surf");
+                document.getElementsByClassName("speed-outer")[0].classList.remove("stat");
+            }else
+            if(this.mapName.indexOf("bhop_") == 0 && this.header == "9:{SHAVITREPLAYFORMAT}{FINAL}"){
+                console.log("Bhop Map. Use shavit-timer.");
+                this.style = reader.readUint8();
+                this.track = reader.readUint8();
+                this.preframes = reader.readInt32();
+                this.size = reader.readInt32() + 64 * 4;
+                this.time = reader.readFloat32();
+                this.steamid = reader.readInt32();
+                this.tickRate = 100;
+                this.firstTickOffset = reader.getOffset() + 16;
+                this.tickSize = 40;
+            }else{
+                console.log("Unknown map or not valid timer version.");
+                throw new Error("无法解析地图！\nBHOP图仅支持 Shavit-Timer\nSURF图仅支持 Shavit-Surf-Timer");
+            }
+
+            console.log(this);
         }
         ReplayFile.prototype.getTickData = function (tick, data) {
-            if (data === undefined)
-                data = new TickData();
-            data.tick = tick;
-            var reader = this.reader;
-            reader.seek(this.firstTickOffset + this.tickSize * tick, Bhop.SeekOrigin.Begin);
-            reader.readVector3(data.position);
-            reader.readVector2(data.angles);
-            data.buttons = reader.readInt32();
-            data.flags = reader.readInt32();
-            data.movetype = reader.readInt32();
-            return data;
+            try{
+                if (data === undefined)
+                    data = new TickData();
+                data.tick = tick;
+                var reader = this.reader;
+                reader.seek(this.firstTickOffset + this.tickSize * tick, Bhop.SeekOrigin.Begin);
+                reader.readVector3(data.position);
+                reader.readVector2(data.angles);
+                data.buttons = reader.readInt32();
+                data.flags = reader.readInt32();
+                data.movetype = reader.readInt32();
+            }catch(_){
+                return new TickData();
+            }finally{
+                return data;
+            }
         };
         ReplayFile.prototype.clampTick = function (tick) {
             return tick < 0 ? 0 : tick >= this.size ? this.size - 1 : tick;
