@@ -330,7 +330,7 @@ var Bhop;
         OptionsMenu.prototype.addToggleOption = function (label, getter, setter, changed) {
             var option = document.createElement("div");
             option.classList.add("option");
-            option.innerHTML = label + "<div class=\"toggle\"><div class=\"knob\"></div></div>";
+            option.innerHTML = "".concat(label, "<div class=\"toggle\"><div class=\"knob\"></div></div>");
             this.optionContainer.appendChild(option);
             var toggle = option.getElementsByClassName("toggle")[0];
             var updateOption = function () {
@@ -422,7 +422,7 @@ var Bhop;
             playbackBar.appendChild(this.fullscreenElem);
             this.speedControlElem = document.createElement("div");
             this.speedControlElem.classList.add("speed-control");
-            this.speedControlElem.innerHTML = "<input class=\"speed-slider\" type=\"range\" min=\"0\" max=\"" + (ReplayControls.speedSliderValues.length - 1) + "\" step=\"1\">";
+            this.speedControlElem.innerHTML = "<input class=\"speed-slider\" type=\"range\" min=\"0\" max=\"".concat(ReplayControls.speedSliderValues.length - 1, "\" step=\"1\">");
             this.container.appendChild(this.speedControlElem);
             this.speedSliderElem = this.speedControlElem.getElementsByClassName("speed-slider")[0];
             this.speedSliderElem.addEventListener("input", function (ev) {
@@ -447,7 +447,7 @@ var Bhop;
                     var minutes = Math.floor(totalSeconds / 60);
                     var seconds = totalSeconds - minutes * 60;
                     var secondsString = seconds.toFixed(1);
-                    _this.timeElem.innerText = minutes + ":" + (secondsString.indexOf(".") === 1 ? "0" : "") + secondsString;
+                    _this.timeElem.innerText = "".concat(minutes, ":").concat(secondsString.indexOf(".") === 1 ? "0" : "").concat(secondsString);
                 }
                 _this.scrubberElem.valueAsNumber = tickData.tick;
             });
@@ -576,8 +576,6 @@ var Bhop;
             this.position = new Facepunch.Vector3();
             this.angles = new Facepunch.Vector2();
             this.tick = -1;
-            this.buttons = 0;
-            this.flags = 0;
         }
         TickData.prototype.getEyeHeight = function () {
             return (this.flags & EntityFlag.Ducking) != 0 ? 46 : 64;
@@ -587,31 +585,91 @@ var Bhop;
     Bhop.TickData = TickData;
     var ReplayFile = /** @class */ (function () {
         function ReplayFile(data) {
-            var reader = this.reader = new Bhop.BinaryReader(data);
+            var reader = (this.reader = new Bhop.BinaryReader(data));
             this.header = reader.readLine();
             this.mapName = reader.readString();
             this.style = reader.readUint8();
             this.track = reader.readUint8();
             this.preframes = reader.readInt32();
-            this.size = reader.readInt32();
+            this.size = reader.readInt32() + 64 * 4;
             this.time = reader.readFloat32();
             this.steamid = reader.readInt32();
-            this.tickRate = 128;
-            this.firstTickOffset = reader.getOffset();
-            this.tickSize = 8 * 4;
+            if (this.mapName.indexOf("bhop_") == 0 && this.header == "9:{SHAVITREPLAYFORMAT}{FINAL}") {
+                /**
+                 * -----BHOP-----
+                 * 在CS起源中，通常的服务器配置为
+                 * Tickrate: 100
+                 * TickSize: 40
+                 * 在最新版ShavitTimer中，Timer头为
+                 * 9:{SHAVITREPLAYFORMAT}{FINAL}
+                 *
+                 * 若想恢复CSGO使用，请按以下参数修改
+                 * this.tickRate = 128;
+                 * this.firstTickOffset = reader.getOffset();
+                 * this.tickSize = 32;
+                 */
+                this.tickRate = 100;
+                this.firstTickOffset = reader.getOffset() + 16;
+                this.tickSize = 40;
+            }
+            else if (this.mapName.indexOf("surf_") == 0 && this.header == "10:{SHAVITREPLAYFORMAT}{FINAL}") {
+                /**
+                 * -----SURF-----
+                 * 注：仅适用于 bhopppp/Shavit-Surf-Timer
+                 * 此为支持旧版 Shavit-Surf-Timer（V10) 回放文件
+                 * 在CS起源中，通常的服务器配置为
+                 * Tickrate: 66
+                 * TickSize: 44
+                 * 在该版本SurfTimer中，Timer头为
+                 * 10:{SHAVITREPLAYFORMAT}{FINAL}
+                 */
+                this.tickRate = 66;
+                this.firstTickOffset = reader.getOffset() + 17;
+                this.tickSize = 44;
+                document.getElementsByClassName("sync-outer")[0].classList.add("surf");
+                document.getElementsByClassName("speed-outer")[0].classList.add("surf");
+                document.getElementsByClassName("speed-outer")[0].classList.remove("stat");
+            }
+            else if (this.mapName.indexOf("surf_") == 0 && this.header == "11:{SHAVITREPLAYFORMAT}{FINAL}") {
+                /**
+                 * -----SURF-----
+                 * 注：仅适用于 bhopppp/Shavit-Surf-Timer
+                 * 在CS起源中，通常的服务器配置为
+                 * Tickrate: 66
+                 * TickSize: 44
+                 * 在最新版SurfTimer中，Timer头为
+                 * 11:{SHAVITREPLAYFORMAT}{FINAL}
+                 */
+                this.tickRate = 66;
+                this.firstTickOffset = reader.getOffset() + 10;
+                this.tickSize = 44;
+                document.getElementsByClassName("sync-outer")[0].classList.add("surf");
+                document.getElementsByClassName("speed-outer")[0].classList.add("surf");
+                document.getElementsByClassName("speed-outer")[0].classList.remove("stat");
+            }
+            else {
+                throw new Error("Cannot parse map!\nPlease check your replay file.");
+            }
         }
         ReplayFile.prototype.getTickData = function (tick, data) {
-            if (data === undefined)
-                data = new TickData();
-            data.tick = tick;
-            var reader = this.reader;
-            reader.seek(this.firstTickOffset + this.tickSize * tick, Bhop.SeekOrigin.Begin);
-            reader.readVector3(data.position);
-            reader.readVector2(data.angles);
-            data.buttons = reader.readInt32();
-            data.flags = reader.readInt32();
-            data.movetype = reader.readInt32();
-            return data;
+            try {
+                if (data === undefined)
+                    data = new TickData();
+                data.tick = tick;
+                var reader = this.reader;
+                reader.seek(this.firstTickOffset + this.tickSize * tick, Bhop.SeekOrigin.Begin);
+                reader.readVector3(data.position);
+                reader.readVector2(data.angles);
+                data.buttons = reader.readInt32();
+                data.flags = reader.readInt32();
+                data.movetype = reader.readInt32();
+            }
+            catch (_) {
+                return new TickData();
+            }
+            finally {
+                return data;
+            }
         };
         ReplayFile.prototype.clampTick = function (tick) {
             return tick < 0 ? 0 : tick >= this.size ? this.size - 1 : tick;
@@ -829,13 +887,13 @@ var Bhop;
          */
         ReplayViewer.prototype.loadReplay = function (url) {
             var _this = this;
-            console.log("Downloading: " + url);
+            console.log("Downloading: ".concat(url));
             var req = new XMLHttpRequest();
             req.open("GET", url, true);
             req.responseType = "arraybuffer";
             req.onload = function (ev) {
                 if (req.status !== 200) {
-                    _this.showMessage("Unable to download replay: " + req.statusText);
+                    _this.showMessage("Unable to download replay: ".concat(req.statusText));
                     return;
                 }
                 var arrayBuffer = req.response;
@@ -848,7 +906,7 @@ var Bhop;
                         _this.replay = new Bhop.ReplayFile(arrayBuffer);
                     }
                     catch (e) {
-                        _this.showMessage("Unable to read replay: " + e);
+                        _this.showMessage("Unable to read replay: ".concat(e));
                     }
                 }
             };
@@ -945,7 +1003,7 @@ var Bhop;
                 }
                 var version = new Date().getTime().toString(16);
                 this.currentMapName = replay.mapName;
-                this.loadMap(this.mapBaseUrl + "/" + replay.mapName + "/index.json?v=" + version);
+                this.loadMap("".concat(this.mapBaseUrl, "/").concat(replay.mapName, "/index.json?v=").concat(version));
             }
         };
         ReplayViewer.prototype.onUpdateFrame = function (dt) {

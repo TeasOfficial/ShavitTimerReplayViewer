@@ -152,7 +152,7 @@
     background-color: rgba(0, 0, 0, 0.25);
 }
 
-.map-viewer .key-display .stat, .map-viewer .key-display .key {
+.map-viewer .key-display .stat, .map-viewer .key-display .key, .surf {
     position: absolute;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.5);
@@ -291,4 +291,26 @@
 .map-viewer .options-list .option .toggle.on .knob {
     left: 28px;
     background-color: #ccc;
+}
+
+.surf{
+    top: 8px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 10pt;
+}
+
+.surf .value {
+    color: #fff;
+    font-size: 12pt;
+}
+
+.sync-outer.surf{
+    display: none;
+}
+
+.speed-outer.surf{
+    left: 8px;
+    right: 0;
+    width: 280px;
 }

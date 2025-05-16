@@ -98,45 +98,90 @@ namespace Bhop {
       this.style = reader.readUint8();
       this.track = reader.readUint8();
       this.preframes = reader.readInt32();
-      this.size = reader.readInt32();
+      this.size = reader.readInt32() + 64*4;
       this.time = reader.readFloat32();
       this.steamid = reader.readInt32();
 
-      /**
-       * 在CS起源中，通常的服务器配置为
-       * Tickrate: 100
-       * TickSize: 40
-       * 在最新版ShavitTimer中，Timer头为
-       * 9:{SHAVITREPLAYFORMAT}{FINAL}
-       *
-       * 若想恢复CSGO使用，请按以下参数修改
-       * this.tickRate = 128;
-       * this.firstTickOffset = reader.getOffset();
-       * this.tickSize = 32;
-       */
-      this.tickRate = 100;
-      this.firstTickOffset = reader.getOffset() + 16;
-      this.tickSize = 40;
+      if(this.mapName.indexOf("bhop_") == 0 && this.header == "9:{SHAVITREPLAYFORMAT}{FINAL}"){
+        /**
+         * -----BHOP-----
+         * 在CS起源中，通常的服务器配置为
+         * Tickrate: 100
+         * TickSize: 40
+         * 在最新版ShavitTimer中，Timer头为
+         * 9:{SHAVITREPLAYFORMAT}{FINAL}
+         *
+         * 若想恢复CSGO使用，请按以下参数修改
+         * this.tickRate = 128;
+         * this.firstTickOffset = reader.getOffset();
+         * this.tickSize = 32;
+         */
+        this.tickRate = 100;
+        this.firstTickOffset = reader.getOffset() + 16;
+        this.tickSize = 40;
+      }else
+      if(this.mapName.indexOf("surf_") == 0 && this.header == "10:{SHAVITREPLAYFORMAT}{FINAL}"){
+        /**
+         * -----SURF-----
+         * 注：仅适用于 bhopppp/Shavit-Surf-Timer
+         * 此为支持旧版 Shavit-Surf-Timer（V10) 回放文件
+         * 在CS起源中，通常的服务器配置为
+         * Tickrate: 66
+         * TickSize: 44
+         * 在该版本SurfTimer中，Timer头为
+         * 10:{SHAVITREPLAYFORMAT}{FINAL}
+         */
+        this.tickRate = 66;
+        this.firstTickOffset = reader.getOffset() + 17;
+        this.tickSize = 44;
+        document.getElementsByClassName("sync-outer")[0].classList.add("surf");
+        document.getElementsByClassName("speed-outer")[0].classList.add("surf");
+        document.getElementsByClassName("speed-outer")[0].classList.remove("stat");
+      }else
+      if(this.mapName.indexOf("surf_") == 0 && this.header == "11:{SHAVITREPLAYFORMAT}{FINAL}"){
+        /**
+         * -----SURF-----
+         * 注：仅适用于 bhopppp/Shavit-Surf-Timer
+         * 在CS起源中，通常的服务器配置为
+         * Tickrate: 66
+         * TickSize: 44
+         * 在最新版SurfTimer中，Timer头为
+         * 11:{SHAVITREPLAYFORMAT}{FINAL}
+         */
+        this.tickRate = 66;
+        this.firstTickOffset = reader.getOffset() + 10;
+        this.tickSize = 44;
+        document.getElementsByClassName("sync-outer")[0].classList.add("surf");
+        document.getElementsByClassName("speed-outer")[0].classList.add("surf");
+        document.getElementsByClassName("speed-outer")[0].classList.remove("stat");
+      }
+      else{
+        throw new Error("Cannot parse map!\nPlease check your replay file.");
+      }
     }
 
     getTickData(tick: number, data?: TickData): TickData {
-      if (data === undefined) data = new TickData();
+      try{
+        if (data === undefined) data = new TickData();
 
-      data.tick = tick;
+        data.tick = tick;
 
-      const reader = this.reader;
-      reader.seek(
-        this.firstTickOffset + this.tickSize * tick,
-        SeekOrigin.Begin
-      );
+        const reader = this.reader;
+        reader.seek(
+          this.firstTickOffset + this.tickSize * tick,
+          SeekOrigin.Begin
+        );
 
-      reader.readVector3(data.position);
-      reader.readVector2(data.angles);
-      data.buttons = reader.readInt32();
-      data.flags = reader.readInt32();
-      data.movetype = reader.readInt32();
-
-      return data;
+        reader.readVector3(data.position);
+        reader.readVector2(data.angles);
+        data.buttons = reader.readInt32();
+        data.flags = reader.readInt32();
+        data.movetype = reader.readInt32();
+      }catch(_){
+        return new TickData();
+      }finally{
+        return data;
+      }
     }
 
     clampTick(tick: number): number {

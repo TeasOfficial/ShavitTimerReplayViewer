@@ -1,2 +1,5 @@
 *.lnk
 config.sh
+/images
+/js
+/styles

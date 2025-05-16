@@ -1,5 +1,3 @@
-/// <reference path="facepunch.webgame.d.ts" />
-/// <reference path="sourceutils.d.ts" />
 declare namespace Bhop {
     enum SeekOrigin {
         Begin = 0,
@@ -133,7 +131,7 @@ declare namespace Bhop {
         Zoom = 524288,
         Weapon1 = 1048576,
         Weapon2 = 2097152,
-        BullRush = 4194304,
+        BullRush = 4194304,// ...what?
         Grenade1 = 8388608,
         Grenade2 = 16777216
     }
